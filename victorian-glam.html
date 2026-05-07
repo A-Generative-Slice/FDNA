@@ -10,11 +10,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
+        @page {
+            size: landscape; /* PPT horizontal format */
+            margin: 0;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden;
             background: #fff;
         }
 
@@ -160,39 +164,54 @@
             .intro-header { padding: 120px 20px 20px; text-align: left; }
             .hero-showcase { grid-template-columns: 1fr; padding: 0 20px; }
             .design-block { padding: 60px 20px; }
-            .content-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .content-wrapper { grid-template-columns: 1fr; gap: 40px; display: flex !important; flex-direction: column !important; }
             
-            /* Illustration First on Mobile */
-            .asset-stack { order: -1; }
+            /* Illustration First on Mobile - FIXED ORDER */
+            .asset-stack { order: -1 !important; width: 100% !important; }
+            .text-content { order: 1 !important; width: 100% !important; }
         }
 
-        /* --- Strict 6-Page PDF Export --- */
+        /* --- PPT 16:9 Landscape PDF Export --- */
         @media print {
             nav, .download-footer, .section-tag { display: none !important; }
             
-            /* Page 1 */
-            .intro-header { padding: 20px !important; margin: 0; page-break-after: avoid; }
-            .hero-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; height: 260mm; align-items: center; page-break-after: always; }
-            .hero-main img { height: 180mm; width: auto; margin: 0 auto; }
-            .hero-details { display: grid; grid-template-columns: 1fr; gap: 10mm; }
-            .hero-details img { height: 80mm; width: auto; margin: 0 auto; }
+            body, html { width: 100%; height: 100%; }
 
-            /* Pages 2-6 */
-            .design-block { 
-                page-break-before: always !important; 
-                height: 297mm; 
-                padding: 10mm !important; 
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                background: white !important;
-                border: none;
+            /* Force 6 Pages */
+            .intro-header, .hero-showcase, .design-block {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                overflow: hidden !important;
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
             }
-            .content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; align-items: center; }
-            .illustration-card img { height: 160mm; }
-            .gallery-row img { height: 90mm; }
-            .text-content h2 { font-size: 20pt; margin-bottom: 5mm; }
-            .text-content p { font-size: 11pt; }
+
+            /* Page 1 Split */
+            .intro-header { height: 30vh !important; page-break-after: avoid !important; }
+            .hero-showcase { height: 70vh !important; margin-top: 0 !important; grid-template-columns: 1fr 1fr !important; }
+            .hero-main img { height: 60vh !important; width: auto !important; }
+            .hero-details { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+            .hero-details img { height: 30vh !important; width: auto !important; }
+
+            /* Pages 2-6 (Dress Slides) */
+            .design-block { background: white !important; }
+            .content-wrapper { 
+                grid-template-columns: 1.2fr 1fr !important; 
+                gap: 50px !important; 
+                max-width: 90% !important; 
+                display: grid !important;
+            }
+            .illustration-card img { height: 70vh !important; }
+            .gallery-row img { height: 40vh !important; }
+            .text-content { text-align: left !important; }
+            .text-content h2 { font-size: 32pt !important; margin-bottom: 5mm !important; }
+            .text-content p { font-size: 14pt !important; line-height: 1.4 !important; }
         }
     </style>
 </head>
@@ -205,7 +224,7 @@
     </nav>
 
     <div class="story-container">
-        <!-- Page 1 -->
+        <!-- Page 1: Introduction & Moodboard -->
         <header class="intro-header">
             <h1>Victorian Glam</h1>
             <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
@@ -221,7 +240,7 @@
             </div>
         </section>
 
-        <!-- Design I: Page 2 -->
+        <!-- Design I: Royal Victorian Heritage -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -233,12 +252,14 @@
                     </div>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card"><img src="assets/victorianglam/heritage_gown_illustration.jpg"></div>
+                    <div class="illustration-card">
+                        <img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Heritage Gown Illustration">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Design II: Page 3 -->
+        <!-- Design II: Midnight Sparkle: Black Velvet -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -250,12 +271,14 @@
                     </div>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card"><img src="assets/victorianglam/black_velvet_illustration.jpg"></div>
+                    <div class="illustration-card">
+                        <img src="assets/victorianglam/black_velvet_illustration.jpg" alt="Black Velvet Illustration">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Design III: Page 4 -->
+        <!-- Design III: The Lavender Blossom -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -267,12 +290,14 @@
                     </div>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card"><img src="assets/victorianglam/lavender_gown_illustration.jpg"></div>
+                    <div class="illustration-card">
+                        <img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Lavender Gown Illustration">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Design IV: Page 5 -->
+        <!-- Design IV: Maroon Velvet Majesty -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -284,12 +309,14 @@
                     </div>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card"><img src="assets/victorianglam/maroon_ballgown_illustration.jpg"></div>
+                    <div class="illustration-card">
+                        <img src="assets/victorianglam/maroon_ballgown_illustration.jpg" alt="Maroon Ballgown Illustration">
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Design V: Page 6 -->
+        <!-- Design V: The Modern Mermaid -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -301,15 +328,17 @@
                     </div>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card"><img src="assets/victorianglam/maroon_mermaid_illustration.jpg"></div>
+                    <div class="illustration-card">
+                        <img src="assets/victorianglam/maroon_mermaid_illustration.jpg" alt="Modern Mermaid Illustration">
+                    </div>
                 </div>
             </div>
         </section>
 
         <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
             <h2>Experience the Full Portfolio</h2>
-            <p style="margin-bottom: 30px; opacity: 0.8;">Download the high-density version for your records.</p>
-            <button onclick="window.print()" style="padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Export PDF</button>
+            <p style="margin-bottom: 30px; opacity: 0.8;">Download the horizontal PPT-style collection for your records.</p>
+            <button onclick="window.print()" style="padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Export Horizontal PDF</button>
         </footer>
     </div>
 
