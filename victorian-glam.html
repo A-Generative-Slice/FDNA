@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         @page {
-            size: landscape; /* PPT horizontal format */
+            size: landscape;
             margin: 0;
         }
 
@@ -20,6 +20,7 @@
             padding: 0;
             width: 100%;
             background: #fff;
+            overflow-x: hidden;
         }
 
         .story-container {
@@ -100,7 +101,7 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* --- Design Blocks --- */
+        /* --- Design Blocks (Grid Areas for Perfect Order) --- */
         .design-block {
             padding: 100px 5%;
             width: 100%;
@@ -115,20 +116,27 @@
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
+            grid-template-areas: 
+                "text illus"
+                "gallery illus";
+            gap: 20px 60px;
             align-items: center;
         }
 
-        .text-content h2 {
+        .text-group { grid-area: text; align-self: end; }
+        .asset-stack { grid-area: illus; align-self: center; }
+        .gallery-row { grid-area: gallery; align-self: start; }
+
+        .text-group h2 {
             font-size: 2.2rem;
             color: var(--maroon);
             margin-bottom: 20px;
         }
-        .text-content p {
+        .text-group p {
             font-size: 1.1rem;
             line-height: 1.7;
             color: #444;
-            margin-bottom: 30px;
+            margin-bottom: 0; /* Margin handled by grid gap */
         }
 
         .illustration-card img {
@@ -145,7 +153,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-top: 20px;
         }
         .gallery-row img {
             width: 100%;
@@ -164,20 +171,26 @@
             .intro-header { padding: 120px 20px 20px; text-align: left; }
             .hero-showcase { grid-template-columns: 1fr; padding: 0 20px; }
             .design-block { padding: 60px 20px; }
-            .content-wrapper { grid-template-columns: 1fr; gap: 40px; display: flex !important; flex-direction: column !important; }
             
-            /* Illustration First on Mobile - FIXED ORDER */
-            .asset-stack { order: -1 !important; width: 100% !important; }
-            .text-content { order: 1 !important; width: 100% !important; }
+            /* Strict Mobile Flow: Text -> Illustration -> Models */
+            .content-wrapper { 
+                display: flex !important; 
+                flex-direction: column !important; 
+                gap: 40px; 
+            }
+            .text-group { order: 1; align-self: stretch; }
+            .asset-stack { order: 2; width: 100%; }
+            .gallery-row { order: 3; width: 100%; }
         }
 
         /* --- PPT 16:9 Landscape PDF Export --- */
         @media print {
+            /* Hide UI Elements on Print */
             nav, .download-footer, .section-tag { display: none !important; }
             
             body, html { width: 100%; height: 100%; }
 
-            /* Force 6 Pages */
+            /* Force 6 Slides exactly */
             .intro-header, .hero-showcase, .design-block {
                 margin: 0 !important;
                 padding: 0 !important;
@@ -192,26 +205,29 @@
                 align-items: center !important;
             }
 
-            /* Page 1 Split */
-            .intro-header { height: 30vh !important; page-break-after: avoid !important; }
-            .hero-showcase { height: 70vh !important; margin-top: 0 !important; grid-template-columns: 1fr 1fr !important; }
-            .hero-main img { height: 60vh !important; width: auto !important; }
+            /* Page 1 (Slide 1) */
+            .intro-header { height: 25vh !important; page-break-after: avoid !important; justify-content: flex-end !important; }
+            .hero-showcase { height: 75vh !important; margin-top: 0 !important; grid-template-columns: 1fr 1fr !important; justify-content: flex-start !important;}
+            .hero-main img { height: 60vh !important; width: auto !important; margin: 0 auto; }
             .hero-details { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
-            .hero-details img { height: 30vh !important; width: auto !important; }
+            .hero-details img { height: 30vh !important; width: auto !important; margin: 0 auto;}
 
-            /* Pages 2-6 (Dress Slides) */
+            /* Pages 2-6 (Slides 2-6) */
             .design-block { background: white !important; }
             .content-wrapper { 
                 grid-template-columns: 1.2fr 1fr !important; 
-                gap: 50px !important; 
+                grid-template-areas: 
+                    "text illus"
+                    "gallery illus" !important;
+                gap: 20px 50px !important; 
                 max-width: 90% !important; 
                 display: grid !important;
             }
-            .illustration-card img { height: 70vh !important; }
+            .illustration-card img { height: 75vh !important; }
             .gallery-row img { height: 40vh !important; }
-            .text-content { text-align: left !important; }
-            .text-content h2 { font-size: 32pt !important; margin-bottom: 5mm !important; }
-            .text-content p { font-size: 14pt !important; line-height: 1.4 !important; }
+            .text-group { text-align: left !important; }
+            .text-group h2 { font-size: 32pt !important; margin-bottom: 5mm !important; }
+            .text-group p { font-size: 14pt !important; line-height: 1.4 !important; }
         }
     </style>
 </head>
@@ -224,7 +240,7 @@
     </nav>
 
     <div class="story-container">
-        <!-- Page 1: Introduction & Moodboard -->
+        <!-- Slide 1: Introduction & Moodboard -->
         <header class="intro-header">
             <h1>Victorian Glam</h1>
             <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
@@ -240,97 +256,97 @@
             </div>
         </section>
 
-        <!-- Design I: Royal Victorian Heritage -->
+        <!-- Slide 2: Royal Victorian Heritage -->
         <section class="design-block">
             <div class="content-wrapper">
-                <div class="text-content reveal">
+                <div class="text-group reveal">
                     <h2>Royal Victorian Heritage</h2>
                     <p>Exploring architectural volume and tiered silk layers. This design achieves a balance of historical weight and contemporary movement.</p>
-                    <div class="gallery-row">
-                        <img src="assets/victorianglam/heritage_gown_photo_1.jpg">
-                        <img src="assets/victorianglam/heritage_gown_photo_2.jpg">
-                    </div>
                 </div>
                 <div class="asset-stack reveal">
                     <div class="illustration-card">
                         <img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Heritage Gown Illustration">
                     </div>
                 </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/victorianglam/heritage_gown_photo_1.jpg">
+                    <img src="assets/victorianglam/heritage_gown_photo_2.jpg">
+                </div>
             </div>
         </section>
 
-        <!-- Design II: Midnight Sparkle: Black Velvet -->
+        <!-- Slide 3: Midnight Sparkle: Black Velvet -->
         <section class="design-block">
             <div class="content-wrapper">
-                <div class="text-content reveal">
+                <div class="text-group reveal">
                     <h2>Midnight Sparkle: Black Velvet</h2>
                     <p>A study in high-pigment black velvet contrasted against ethereal sparkle tulle, representing the dramatic 'Glam' aesthetic.</p>
-                    <div class="gallery-row">
-                        <img src="assets/victorianglam/black_velvet_photo_1.jpg">
-                        <img src="assets/victorianglam/black_velvet_photo_2.jpg">
-                    </div>
                 </div>
                 <div class="asset-stack reveal">
                     <div class="illustration-card">
                         <img src="assets/victorianglam/black_velvet_illustration.jpg" alt="Black Velvet Illustration">
                     </div>
                 </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/victorianglam/black_velvet_photo_1.jpg">
+                    <img src="assets/victorianglam/black_velvet_photo_2.jpg">
+                </div>
             </div>
         </section>
 
-        <!-- Design III: The Lavender Blossom -->
+        <!-- Slide 4: The Lavender Blossom -->
         <section class="design-block">
             <div class="content-wrapper">
-                <div class="text-content reveal">
+                <div class="text-group reveal">
                     <h2>The Lavender Blossom</h2>
                     <p>Romanticism brought to life through silver embroidery and delicate sheer layers, providing a soft counterpoint to the velvet pieces.</p>
-                    <div class="gallery-row">
-                        <img src="assets/victorianglam/lavender_gown_photo_1.jpg">
-                        <img src="assets/victorianglam/lavender_gown_photo_2.jpg">
-                    </div>
                 </div>
                 <div class="asset-stack reveal">
                     <div class="illustration-card">
                         <img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Lavender Gown Illustration">
                     </div>
                 </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/victorianglam/lavender_gown_photo_1.jpg">
+                    <img src="assets/victorianglam/lavender_gown_photo_2.jpg">
+                </div>
             </div>
         </section>
 
-        <!-- Design IV: Maroon Velvet Majesty -->
+        <!-- Slide 5: Maroon Velvet Majesty -->
         <section class="design-block">
             <div class="content-wrapper">
-                <div class="text-content reveal">
+                <div class="text-group reveal">
                     <h2>Maroon Velvet Majesty</h2>
                     <p>Showcasing industrial construction standards with heavy velvet and a technical bodice for structural integrity.</p>
-                    <div class="gallery-row">
-                        <img src="assets/victorianglam/maroon_ballgown_photo_1.jpg">
-                        <img src="assets/victorianglam/maroon_ballgown_photo_2.jpg">
-                    </div>
                 </div>
                 <div class="asset-stack reveal">
                     <div class="illustration-card">
                         <img src="assets/victorianglam/maroon_ballgown_illustration.jpg" alt="Maroon Ballgown Illustration">
                     </div>
                 </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/victorianglam/maroon_ballgown_photo_1.jpg">
+                    <img src="assets/victorianglam/maroon_ballgown_photo_2.jpg">
+                </div>
             </div>
         </section>
 
-        <!-- Design V: The Modern Mermaid -->
+        <!-- Slide 6: The Modern Mermaid -->
         <section class="design-block">
             <div class="content-wrapper">
-                <div class="text-content reveal">
+                <div class="text-group reveal">
                     <h2>The Modern Mermaid</h2>
                     <p>A fusion of Victorian luxury and 21st-century silhouettes. The diamond mesh pattern overlay creates a dynamic play of light.</p>
-                    <div class="gallery-row">
-                        <img src="assets/victorianglam/maroon_mermaid_photo_3.jpg">
-                        <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
-                    </div>
                 </div>
                 <div class="asset-stack reveal">
                     <div class="illustration-card">
                         <img src="assets/victorianglam/maroon_mermaid_illustration.jpg" alt="Modern Mermaid Illustration">
                     </div>
+                </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/victorianglam/maroon_mermaid_photo_3.jpg">
+                    <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
                 </div>
             </div>
         </section>
