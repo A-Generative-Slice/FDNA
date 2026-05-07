@@ -60,12 +60,16 @@ function openProject(id) {
         storyContainer.appendChild(img);
     });
     
+    // Reset scroll positions
+    storyContainer.scrollTop = 0;
+    document.querySelector('.modal-details').scrollTop = 0;
+    
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden'; 
     document.body.classList.add('modal-open');
 
-    gsap.from('.modal-content', { scale: 0.9, opacity: 0, duration: 0.6, ease: "power4.out" });
-    gsap.from('.story-image', { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, delay: 0.3 });
+    gsap.from('.modal-content', { scale: 0.95, opacity: 0, duration: 0.6, ease: "power2.out" });
+    gsap.from('.story-image', { opacity: 0, y: 50, duration: 0.8, stagger: 0.1, delay: 0.2 });
 }
 
 // Close Project Detail
