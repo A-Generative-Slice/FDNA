@@ -22,10 +22,10 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Guarantee centering */
+            align-items: center;
         }
 
-        /* --- Refined Nav for Story --- */
+        /* --- Refined Nav --- */
         nav {
             position: fixed;
             top: 20px;
@@ -34,7 +34,7 @@
             width: 90%;
             max-width: 1200px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
@@ -47,11 +47,10 @@
 
         /* --- Header --- */
         .intro-header {
-            padding: 160px 5% 40px;
+            padding: 160px 5% 20px;
             width: 100%;
             max-width: 1200px;
             text-align: center;
-            margin: 0 auto;
         }
         .intro-header h1 {
             font-size: clamp(2rem, 6vw, 4rem);
@@ -69,16 +68,16 @@
 
         .hero-showcase {
             width: 90%;
-            max-width: 1200px;
-            margin: 60px auto 100px;
+            max-width: 1100px;
+            margin: 40px auto 40px;
             display: grid;
             grid-template-columns: 1.5fr 1fr;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
         }
 
         .hero-main {
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
@@ -90,8 +89,8 @@
         }
 
         .hero-details {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 20px;
         }
         .detail-item img {
@@ -102,52 +101,50 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* --- Balanced Design Blocks --- */
+        /* --- Design Blocks --- */
         .design-block {
-            padding: 100px 5%;
+            padding: 80px 5%;
             width: 100%;
             display: flex;
             justify-content: center;
+            border-bottom: 1px solid #eee;
         }
         .design-block:nth-child(even) { background: #fafafa; }
 
         .content-wrapper {
-            max-width: 1200px;
+            max-width: 1100px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+            gap: 60px;
+            align-items: start;
         }
 
-        .reverse .content-wrapper { direction: rtl; }
-        .reverse .text-content { direction: ltr; }
-
         .text-content h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--maroon);
-            margin-bottom: 25px;
-            line-height: 1.1;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
         .text-content p {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.7;
             color: #444;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .asset-stack {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
         }
 
         .illustration-card {
             border-radius: 20px;
             overflow: hidden;
             background: #fff;
-            padding: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            padding: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
         }
         .illustration-card img {
             width: 100%;
@@ -159,7 +156,7 @@
         .gallery-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 15px;
         }
         .gallery-row img {
             width: 100%;
@@ -172,26 +169,52 @@
         /* --- Mobile Lookbook --- */
         @media (max-width: 768px) {
             nav { width: 95%; height: 50px; padding: 0 15px; top: 10px; }
-            .logo { font-size: 0.8rem; }
-            .nav-links a { font-size: 0.7rem; }
+            .logo { font-size: 0.85rem; }
+            .nav-links a { font-size: 0.75rem; }
 
-            .intro-header { padding: 120px 20px 30px; }
-            .hero-showcase { grid-template-columns: 1fr; margin-bottom: 60px; }
-            .content-wrapper { grid-template-columns: 1fr; gap: 40px; }
-            .text-content h2 { font-size: 1.8rem; }
-            .design-block { padding: 60px 20px; }
+            .intro-header { padding: 120px 25px 30px; text-align: left; }
+            .intro-header h1 { font-size: 1.8rem; }
+            
+            .hero-showcase { grid-template-columns: 1fr; width: 100%; padding: 0 25px; margin: 20px 0; }
+            
+            .design-block { padding: 50px 25px; }
+            .content-wrapper { grid-template-columns: 1fr; gap: 30px; display: flex; flex-direction: column; }
+            
+            /* Illustrations FIRST on Mobile */
+            .asset-stack { order: -1; } 
+            
+            .text-content h2 { font-size: 1.6rem; }
+            .text-content p { font-size: 1rem; }
         }
 
+        /* --- PDF PRINT (6 Pages) --- */
         @media print {
             nav, .download-footer, .section-tag { display: none !important; }
-            .intro-header { padding: 40px !important; }
-            .hero-showcase { page-break-after: always; display: block; }
-            .hero-main { width: 100mm; margin: 0 auto; }
-            .hero-details { display: none; }
-            .design-block { page-break-before: always; height: 290mm; padding: 20px !important; display: block; }
-            .content-wrapper { display: block; }
-            .asset-stack { width: 120mm; margin: 0 auto; }
-            .text-content { text-align: center; margin-bottom: 20px; }
+            
+            /* Page 1: Intro + Themes */
+            .intro-header { padding: 40px !important; margin: 0; }
+            .hero-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; page-break-after: always; height: 280mm; align-content: center; }
+            .hero-main img { height: 180mm; width: auto; margin: 0 auto; }
+            .hero-details { display: grid; grid-template-columns: 1fr; gap: 15mm; }
+            .detail-item img { height: 80mm; width: auto; margin: 0 auto; }
+
+            /* Pages 2-6: Each Dress */
+            .design-block { 
+                page-break-before: always; 
+                height: 297mm; 
+                padding: 15mm !important; 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background: white !important;
+                border: none;
+            }
+            .content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; align-items: center; }
+            .asset-stack { width: 100%; }
+            .illustration-card img { height: 140mm; }
+            .gallery-row img { height: 100mm; }
+            .text-content h2 { font-size: 24pt; margin-bottom: 5mm; }
+            .text-content p { font-size: 12pt; margin-bottom: 10mm; }
         }
     </style>
 </head>
@@ -199,13 +222,13 @@
     <nav>
         <div class="logo">NAJEEMA AFRIN</div>
         <div class="nav-links">
-            <a href="index.html" style="text-decoration: none; color: var(--maroon); font-weight: 700;">HOME</a>
+            <a href="index.html" style="text-decoration: none; color: var(--maroon); font-weight: 700; letter-spacing: 1px;">BACK TO HOME</a>
         </div>
     </nav>
 
     <div class="story-container">
+        <!-- Page 1 Intro Content -->
         <header class="intro-header">
-            <span class="section-tag">High Fashion Collection</span>
             <h1>Victorian Glam</h1>
             <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
         </header>
@@ -220,7 +243,7 @@
             </div>
         </section>
 
-        <!-- Design I: Heritage Gown -->
+        <!-- Design I: Page 2 -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -237,8 +260,8 @@
             </div>
         </section>
 
-        <!-- Design II: Black Velvet -->
-        <section class="design-block reverse">
+        <!-- Design II: Page 3 -->
+        <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>Midnight Sparkle: Black Velvet</h2>
@@ -254,7 +277,7 @@
             </div>
         </section>
 
-        <!-- Design III: Lavender Blossom -->
+        <!-- Design III: Page 4 -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -271,8 +294,8 @@
             </div>
         </section>
 
-        <!-- Design IV: Maroon Majesty -->
-        <section class="design-block reverse">
+        <!-- Design IV: Page 5 -->
+        <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>Maroon Velvet Majesty</h2>
@@ -288,7 +311,7 @@
             </div>
         </section>
 
-        <!-- Design V: Modern Mermaid -->
+        <!-- Design V: Page 6 -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
@@ -316,9 +339,9 @@
         gsap.registerPlugin(ScrollTrigger);
         document.querySelectorAll('.reveal').forEach(el => {
             gsap.from(el, {
-                scrollTrigger: { trigger: el, start: "top 90%" },
+                scrollTrigger: { trigger: el, start: "top 95%" },
                 opacity: 0,
-                y: 30,
+                y: 20,
                 duration: 0.8,
                 ease: "power2.out"
             });
