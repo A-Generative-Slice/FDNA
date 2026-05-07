@@ -7,46 +7,65 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Project Data
 const projects = {
-    'vg-1': {
-        title: 'Lavender Blossom: Ethereal Ballgown',
-        desc: 'A dream-like lavender and silver gown featuring delicate tulle layers and a shimmering bodice. This piece explores the softer side of the Victorian Glam collection, balancing historical silhouettes with modern sparkle. (Reference: Illustration ...053 / Photo ...054)',
-        img: 'assets/victorianglam/6332118641989587053.jpg'
-    },
-    'vg-2': {
-        title: 'Midnight Sparkle: Black Velvet Gown',
-        desc: 'A sophisticated black velvet and sparkle tulle gown. Features a detailed velvet bodice with beaded trim and a matching rhinestone tiara. This design represents the "Glam" in Victorian Glam, emphasizing high-contrast luxury. (Reference: Illustration ...099 / Photo ...101)',
-        img: 'assets/victorianglam/6332118641989587099.jpg'
-    },
-    'vg-3': {
-        title: 'Maroon Velvet Majesty',
-        desc: 'A heavy maroon velvet and tulle ballgown. This technical masterpiece includes matching velvet gloves and a matchtone tiara. The rich texture of the velvet combined with the airiness of the tulle creates a commanding presence. (Reference: Illustration ...065 / Photo ...066)',
-        img: 'assets/victorianglam/6332118641989587065.jpg'
-    },
-    'vg-4': {
-        title: 'Maroon Mermaid: Modern Silhouette',
-        desc: 'A bridge between traditional Victorian tones and modern mermaid silhouettes. Features a high-pigment maroon base with a delicate diamond-patterned overlay that catches the light with every movement. (Reference: Illustration ...090 / Photo ...087)',
-        img: 'assets/victorianglam/6332118641989587090.jpg'
-    },
-    'vg-5': {
-        title: 'Royal Victorian Heritage',
-        desc: 'The flagship of the collection—a tiered Victorian dress in white and maroon. This design features intricate floral prints on the sleeves and a corset-style lacing, echoing the peak of 19th-century royal fashion. (Reference: Illustration ...364 / Photo ...045)',
-        img: 'assets/victorianglam/6199535707391463364.jpg'
+    'victorian-glam': {
+        title: 'Victorian Glam Collection',
+        sub: 'A Royal Synthesis of Tradition & Modernity',
+        desc: 'The Victorian Glam collection is an exhaustive exploration of 19th-century royal aesthetics reimagined for the modern era. From the deep velvet ballgowns of the British aristocracy to contemporary mermaid silhouettes with industrial-grade finishing, this story showcases the full journey of a garment—from moodboard and technical illustration to the final stitched masterpiece.',
+        img: 'assets/victorianglam/victorian_glam_cover.jpg',
+        story: [
+            'assets/victorianglam/victorian_glam_cover.jpg',
+            'assets/victorianglam/moodboard_2.jpg',
+            'assets/victorianglam/heritage_gown_illustration.jpg',
+            'assets/victorianglam/heritage_gown_photo_1.jpg',
+            'assets/victorianglam/heritage_gown_photo_2.jpg',
+            'assets/victorianglam/maroon_ballgown_illustration.jpg',
+            'assets/victorianglam/maroon_ballgown_photo_1.jpg',
+            'assets/victorianglam/maroon_ballgown_photo_2.jpg',
+            'assets/victorianglam/maroon_ballgown_photo_3.jpg',
+            'assets/victorianglam/black_velvet_illustration.jpg',
+            'assets/victorianglam/black_velvet_photo_1.jpg',
+            'assets/victorianglam/black_velvet_photo_2.jpg',
+            'assets/victorianglam/lavender_gown_illustration.jpg',
+            'assets/victorianglam/lavender_gown_photo_1.jpg',
+            'assets/victorianglam/lavender_gown_photo_2.jpg',
+            'assets/victorianglam/lavender_gown_photo_3.jpg',
+            'assets/victorianglam/maroon_mermaid_illustration.jpg',
+            'assets/victorianglam/maroon_mermaid_photo_1.jpg',
+            'assets/victorianglam/maroon_mermaid_photo_2.jpg',
+            'assets/victorianglam/maroon_mermaid_photo_3.jpg',
+            'assets/victorianglam/detail_sketch_1.jpg',
+            'assets/victorianglam/detail_embroidery_1.jpg',
+            'assets/victorianglam/detail_lace_1.jpg'
+        ]
     }
 };
 
 // Open Project Detail
 function openProject(id) {
     const data = projects[id];
-    document.getElementById('modal-img').src = data.img;
+    const modal = document.getElementById('project-modal');
+    const storyContainer = document.getElementById('modal-story-container');
+    
+    // Clear previous story
+    storyContainer.innerHTML = '';
+    
     document.getElementById('modal-title').innerText = data.title;
     document.getElementById('modal-desc').innerText = data.desc;
     
-    const modal = document.getElementById('project-modal');
+    // Populate Story View
+    data.story.forEach(imgPath => {
+        const img = document.createElement('img');
+        img.src = imgPath;
+        img.className = 'story-image';
+        storyContainer.appendChild(img);
+    });
+    
     modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent scroll
+    document.body.style.overflow = 'hidden'; 
     document.body.classList.add('modal-open');
 
-    gsap.from('.modal-content', { scale: 0.8, opacity: 0, duration: 0.5, ease: "back.out(1.7)" });
+    gsap.from('.modal-content', { scale: 0.9, opacity: 0, duration: 0.6, ease: "power4.out" });
+    gsap.from('.story-image', { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, delay: 0.3 });
 }
 
 // Close Project Detail
