@@ -12,19 +12,21 @@
     --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-* {
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal bleeding */
+    width: 100%;
+    position: relative;
 }
 
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--beige);
     color: var(--charcoal);
-    line-height: 1.7;
-    overflow-x: hidden;
+    line-height: 1.6;
 }
 
 h1, h2, h3 {
