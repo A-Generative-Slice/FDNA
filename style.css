@@ -348,16 +348,79 @@ section { padding: 100px 10%; }
 /* Hide the CV container in screen mode */
 .cv-print-container { display: none; }
 
+/* --- Mobile Menu Button --- */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 2100;
+}
+
+.mobile-menu-btn span {
+    width: 30px;
+    height: 2px;
+    background: var(--maroon);
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Mobile Navigation Overlay --- */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100vh;
+    background: var(--white);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: var(--transition);
+}
+
+.mobile-nav.active {
+    left: 0;
+}
+
+.mobile-nav a {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--maroon);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
 /* --- Mobile Responsive Optimizations --- */
 @media (max-width: 768px) {
     nav {
-        padding: 10px 20px;
-        width: 95%;
-        top: 10px;
+        padding: 15px 25px;
+        width: 92%;
+        top: 15px;
+        border-radius: 50px;
     }
 
     .nav-links {
-        display: none; /* We will use a simple list or just hide for now to keep it clean */
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
     }
 
     .hero h1 {

@@ -86,7 +86,20 @@
             <a href="#portfolio">Portfolio</a>
             <a href="#contact">Contact</a>
         </div>
+        <div class="mobile-menu-btn" id="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#experience" onclick="toggleMenu()">Experience</a>
+        <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
 
     <header class="hero">
         <div class="hero-content">
@@ -142,29 +155,45 @@
 
     <section id="portfolio">
         <span class="section-tag">Portfolio</span>
-        <h2 class="section-title">Crafting the Future</h2>
+        <h2 class="section-title">Victorian Glam Collection</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-card reveal" onclick="openProject('item-1')">
-                <img src="https://images.unsplash.com/photo-1539109132382-381bb3f1c2b3?auto=format&fit=crop&q=80&w=800" alt="Illustration">
+            <div class="portfolio-card reveal" onclick="openProject('vg-5')">
+                <img src="assets/victorianglam/6332118641989587045.jpg" alt="Royal Victorian">
                 <div class="portfolio-overlay">
-                    <h3>The Sketchbook</h3>
-                    <p>Where lines meet imagination. Detailed editorial illustrations.</p>
+                    <h3>Royal Victorian Heritage</h3>
+                    <p>Flagship white & maroon tiered gown.</p>
                     <span class="btn-explore">EXPLORE PLATE</span>
                 </div>
             </div>
-            <div class="portfolio-card reveal" onclick="openProject('item-2')">
-                <img src="https://images.unsplash.com/photo-1445205170230-053b830c6050?auto=format&fit=crop&q=80&w=800" alt="Construction">
+            <div class="portfolio-card reveal" onclick="openProject('vg-3')">
+                <img src="assets/victorianglam/6332118641989587066.jpg" alt="Maroon Velvet">
                 <div class="portfolio-overlay">
-                    <h3>Stitched with Care</h3>
-                    <p>Practical construction projects from my industry experience.</p>
+                    <h3>Maroon Velvet Majesty</h3>
+                    <p>Velvet & tulle with industrial precision.</p>
                     <span class="btn-explore">EXPLORE PLATE</span>
                 </div>
             </div>
-            <div class="portfolio-card reveal" onclick="openProject('item-3')">
-                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=800" alt="Textile">
+            <div class="portfolio-card reveal" onclick="openProject('vg-2')">
+                <img src="assets/victorianglam/6332118641989587101.jpg" alt="Midnight Sparkle">
                 <div class="portfolio-overlay">
-                    <h3>The Jamun Project</h3>
-                    <p>Eco-friendly dye extraction and textile application research.</p>
+                    <h3>Midnight Sparkle</h3>
+                    <p>Black velvet & sparkle tulle masterpiece.</p>
+                    <span class="btn-explore">EXPLORE PLATE</span>
+                </div>
+            </div>
+            <div class="portfolio-card reveal" onclick="openProject('vg-1')">
+                <img src="assets/victorianglam/6332118641989587054.jpg" alt="Lavender Blossom">
+                <div class="portfolio-overlay">
+                    <h3>Lavender Blossom</h3>
+                    <p>Ethereal lavender silk & silver embroidery.</p>
+                    <span class="btn-explore">EXPLORE PLATE</span>
+                </div>
+            </div>
+            <div class="portfolio-card reveal" onclick="openProject('vg-4')">
+                <img src="assets/victorianglam/6332118641989587087.jpg" alt="Maroon Mermaid">
+                <div class="portfolio-overlay">
+                    <h3>Maroon Mermaid</h3>
+                    <p>Modern silhouette with diamond mesh patterns.</p>
                     <span class="btn-explore">EXPLORE PLATE</span>
                 </div>
             </div>

@@ -7,20 +7,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Project Data
 const projects = {
-    'item-1': {
-        title: 'The Sketchbook: Editorial Vision',
-        desc: 'A curated series of fashion illustrations that bridge the gap between abstract concept and wearable reality. This collection explores the use of negative space and fluid line-work to convey the movement of silk on the human form. It represents my initial design phase, where curiosity meets the tip of the pencil.',
-        img: 'https://images.unsplash.com/photo-1539109132382-381bb3f1c2b3?auto=format&fit=crop&q=80&w=1200'
+    'vg-1': {
+        title: 'Lavender Blossom: Ethereal Ballgown',
+        desc: 'A dream-like lavender and silver gown featuring delicate tulle layers and a shimmering bodice. This piece explores the softer side of the Victorian Glam collection, balancing historical silhouettes with modern sparkle. (Reference: Illustration ...053 / Photo ...054)',
+        img: 'assets/victorianglam/6332118641989587053.jpg'
     },
-    'item-2': {
-        title: 'Stitched with Care: Industrial Precision',
-        desc: 'Drawing from my hands-on experience in the export sector, these pieces showcase the technical side of fashion. From intricate seam finishes to calibrated industrial stitching, this work demonstrates my ability to bring a design to life with factory-level precision and an uncompromising eye for detail.',
-        img: 'https://images.unsplash.com/photo-1445205170230-053b830c6050?auto=format&fit=crop&q=80&w=1200'
+    'vg-2': {
+        title: 'Midnight Sparkle: Black Velvet Gown',
+        desc: 'A sophisticated black velvet and sparkle tulle gown. Features a detailed velvet bodice with beaded trim and a matching rhinestone tiara. This design represents the "Glam" in Victorian Glam, emphasizing high-contrast luxury. (Reference: Illustration ...099 / Photo ...101)',
+        img: 'assets/victorianglam/6332118641989587099.jpg'
     },
-    'item-3': {
-        title: 'The Jamun Project: Sustainable Science',
-        desc: 'My flagship research project focusing on eco-conscious fashion. I successfully extracted high-pigment natural dyes from Jamun seeds, applying them to organic cotton and silk samples. This project reflects my commitment to sustainable textile science and my desire to bring environmental curiosity into the fashion classroom.',
-        img: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=1200'
+    'vg-3': {
+        title: 'Maroon Velvet Majesty',
+        desc: 'A heavy maroon velvet and tulle ballgown. This technical masterpiece includes matching velvet gloves and a matchtone tiara. The rich texture of the velvet combined with the airiness of the tulle creates a commanding presence. (Reference: Illustration ...065 / Photo ...066)',
+        img: 'assets/victorianglam/6332118641989587065.jpg'
+    },
+    'vg-4': {
+        title: 'Maroon Mermaid: Modern Silhouette',
+        desc: 'A bridge between traditional Victorian tones and modern mermaid silhouettes. Features a high-pigment maroon base with a delicate diamond-patterned overlay that catches the light with every movement. (Reference: Illustration ...090 / Photo ...087)',
+        img: 'assets/victorianglam/6332118641989587090.jpg'
+    },
+    'vg-5': {
+        title: 'Royal Victorian Heritage',
+        desc: 'The flagship of the collection—a tiered Victorian dress in white and maroon. This design features intricate floral prints on the sleeves and a corset-style lacing, echoing the peak of 19th-century royal fashion. (Reference: Illustration ...364 / Photo ...045)',
+        img: 'assets/victorianglam/6199535707391463364.jpg'
     }
 };
 
@@ -70,11 +80,32 @@ reveals.forEach(el => {
     });
 });
 
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileNav = document.getElementById('mobile-nav');
+
+function toggleMenu() {
+    mobileMenuBtn.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+}
+
+mobileMenuBtn.addEventListener('click', toggleMenu);
+
 // Navigation Smooth Scroll
-document.querySelectorAll('.nav-links a').forEach(anchor => {
+document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        const target = this.getAttribute('href');
-        gsap.to(window, { duration: 1, scrollTo: target, ease: "power2.inOut" });
+        const targetId = this.getAttribute('href');
+        
+        if (mobileNav.classList.contains('active')) {
+            toggleMenu();
+        }
+
+        gsap.to(window, { 
+            duration: 1, 
+            scrollTo: { y: targetId, offsetY: 70 }, 
+            ease: "power2.inOut" 
+        });
     });
 });
