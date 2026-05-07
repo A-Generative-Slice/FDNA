@@ -81,6 +81,29 @@ nav {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: var(--transition);
+    position: relative; /* Ensure relative for absolute underline */
+    padding: 5px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--maroon);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+@media print {
+    nav, .mobile-menu-btn, .mobile-nav, .hero-content .modern-btn, footer {
+        display: none !important;
+    }
 }
 
 .nav-links a::after {
