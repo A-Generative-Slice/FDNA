@@ -3,220 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victorian Glam | Najeema Afrin Portfolio</title>
+    <title>Victorian Glam Story | Najeema Afrin</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        .story-page {
-            background: #fdfbf7;
-            padding-top: 120px;
-        }
-        .story-hero {
-            text-align: center;
-            padding: 100px 10%;
-            background: var(--white);
-            margin-bottom: 60px;
-        }
-        .story-hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            color: var(--maroon);
-            margin-bottom: 20px;
-        }
-        .story-hero p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            color: #666;
-            line-height: 1.8;
-        }
-        .story-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 100px;
-            display: flex;
-            flex-direction: column;
-            gap: 120px;
-        }
-        .story-block {
+        .story-container { background: #fffcf8; }
+        
+        .intro-section {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
+            grid-template-columns: 80px 1.5fr 1fr;
+            gap: 40px;
+            padding: 150px 5% 100px;
             align-items: center;
         }
-        .story-block.reverse {
-            grid-template-columns: 0.8fr 1.2fr;
-        }
-        .story-image-container {
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
-        .story-image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 1s ease;
-        }
-        .story-image-container:hover img {
-            transform: scale(1.05);
-        }
-        .story-text h2 {
-            font-size: 2.5rem;
-            color: var(--maroon);
-            margin-bottom: 20px;
-        }
-        .story-text p {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.8;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 40px;
-            font-weight: 700;
+
+        .sideways-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
             color: var(--maroon);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 2px solid var(--maroon);
-            padding-bottom: 5px;
+            font-weight: 700;
+            border-left: 2px solid var(--gold);
+            padding-left: 15px;
+            height: fit-content;
         }
 
-        @media (max-width: 768px) {
-            .story-block, .story-block.reverse {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .story-hero { padding: 60px 20px; }
-            .story-hero h1 { font-size: 2.5rem; }
-            .story-grid { gap: 60px; }
+        .main-cover {
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        .main-cover img { width: 100%; height: auto; display: block; }
+
+        .sub-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .detail-item img { width: 100%; height: auto; display: block; transition: 0.5s; }
+        .detail-item:hover img { transform: scale(1.1); }
+
+        .theme-block {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .theme-assets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .asset-large { grid-column: span 2; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); }
+        .asset-small { border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
+        .asset-large img, .asset-small img { width: 100%; height: auto; display: block; }
+
+        .theme-text { padding: 40px 0; }
+        .theme-text h2 { font-size: 3rem; color: var(--maroon); margin-bottom: 25px; line-height: 1.1; }
+        .theme-text p { font-size: 1.15rem; color: #555; line-height: 1.8; margin-bottom: 30px; }
+
+        .model-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .model-card {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            aspect-ratio: 2/3;
+        }
+        .model-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        .download-footer {
+            padding: 100px 5%;
+            text-align: center;
+            background: var(--maroon);
+            color: white;
+        }
+
+        .btn-download {
+            padding: 20px 50px;
+            background: var(--gold);
+            color: var(--maroon);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .btn-download:hover { transform: scale(1.05); background: white; }
+
+        @media (max-width: 1024px) {
+            .intro-section { grid-template-columns: 1fr; padding-top: 120px; }
+            .sideways-text { writing-mode: horizontal-tb; transform: rotate(0); border-left: none; border-bottom: 2px solid var(--gold); padding: 0 0 10px; width: 100%; }
+            .theme-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
         @media print {
-            nav, .back-link, footer { display: none !important; }
-            .story-page { padding: 0; }
-            .story-block { display: block; page-break-after: always; padding: 20px; }
-            .story-image-container { box-shadow: none; border-radius: 0; }
-            .story-text { padding: 40px 0; }
+            .download-footer, nav { display: none !important; }
+            .theme-block { page-break-after: always; padding: 20px !important; }
+            .intro-section { padding: 20px !important; }
+            .story-container { background: white; }
         }
     </style>
 </head>
-<body class="story-page">
+<body>
     <nav>
         <div class="logo">NAJEEMA AFRIN</div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#portfolio">Portfolio</a>
+            <a href="index.html">Back to Home</a>
         </div>
     </nav>
 
-    <header class="story-hero">
-        <span class="section-tag">Featured Collection</span>
-        <h1>Victorian Glam</h1>
-        <p>A deep-dive into the synthesis of 19th-century royal aesthetics and modern industrial fashion. Every stitch tells a story of heritage, precision, and curiosity.</p>
-        <a href="index.html#portfolio" class="back-link">← Return to Main Portfolio</a>
-    </header>
-
-    <main class="story-grid">
-        <!-- Story Block 1: Cover/Moodboard -->
-        <section class="story-block reveal">
-            <div class="story-image-container">
-                <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Moodboard">
+    <div class="story-container">
+        <!-- Intro Section -->
+        <section class="intro-section">
+            <div class="sideways-text">The Synthesis of Royalty</div>
+            <div class="main-cover reveal">
+                <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Victorian Glam Cover">
             </div>
-            <div class="story-text">
-                <h2>The Conceptual Spark</h2>
-                <p>The collection began with a fascination for the intricate silhouettes of the Victorian era. This moodboard captures the essence of royal burgundy, creamy lace, and the rigid yet flowing structures of high-society gowns.</p>
+            <div class="sub-details">
+                <div class="detail-item reveal"><img src="assets/victorianglam/detail_embroidery_1.jpg" alt="Embroidery"></div>
+                <div class="detail-item reveal"><img src="assets/victorianglam/detail_lace_1.jpg" alt="Lace"></div>
+                <div class="detail-item reveal"><img src="assets/victorianglam/detail_sketch_1.jpg" alt="Sketch"></div>
             </div>
         </section>
 
-        <!-- Story Block 2: Heritage Gown -->
-        <section class="story-block reverse reveal">
-            <div class="story-text">
-                <h2>Royal Victorian Heritage</h2>
-                <p>A flagship tiered gown in white and maroon. This design features intricate floral prints and a corset-style lacing, echoing the peak of 19th-century royal fashion while maintaining a clean, modern finish.</p>
-            </div>
-            <div class="story-image-container">
-                <img src="assets/victorianglam/heritage_gown_photo_1.jpg" alt="Heritage Gown">
-            </div>
-        </section>
-
-        <!-- Story Block 3: Technical Illustration -->
-        <section class="story-block reveal">
-            <div class="story-image-container">
-                <img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Technical Illustration">
-            </div>
-            <div class="story-text">
-                <h2>Precision in Sketching</h2>
-                <p>Behind every physical garment is a technical vision. My illustrations bridge the gap between imagination and construction, detailing every seam, lace placement, and tiered layer for industrial-level execution.</p>
-            </div>
-        </section>
-
-        <!-- Story Block 4: Maroon Ballgown -->
-        <section class="story-block reverse reveal">
-            <div class="story-text">
-                <h2>Maroon Velvet Majesty</h2>
-                <p>Exploring the weight and luxury of velvet. This ballgown utilizes heavy maroon velvet paired with airy tulle, creating a commanding presence that is both industrial in its construction and royal in its aesthetic.</p>
-            </div>
-            <div class="story-image-container">
-                <img src="assets/victorianglam/maroon_ballgown_photo_1.jpg" alt="Maroon Ballgown">
-            </div>
-        </section>
-
-        <!-- Story Block 5: Lavender Gown -->
-        <section class="story-block reveal">
-            <div class="story-image-container">
-                <img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Lavender Sketch">
-            </div>
-            <div class="story-text">
-                <h2>The Lavender Blossom</h2>
-                <p>A dream-like lavender and silver gown featuring delicate tulle layers and a shimmering bodice. This piece explores the softer side of the Victorian Glam collection, balancing historical silhouettes with modern sparkle.</p>
-            </div>
-        </section>
-
-        <!-- Story Block 6: Maroon Mermaid -->
-        <section class="story-block reverse reveal">
-            <div class="story-text">
-                <h2>Maroon Mermaid Elegance</h2>
-                <p>A bridge between traditional Victorian tones and modern mermaid silhouettes. Features a high-pigment maroon base with a delicate diamond-patterned overlay that catches the light with every movement.</p>
-            </div>
-            <div class="story-image-container">
-                <img src="assets/victorianglam/maroon_mermaid_photo_1.jpg" alt="Maroon Mermaid">
-            </div>
-        </section>
-
-        <!-- Gallery Grid for Remaining Images -->
-        <section class="reveal">
-            <h2 style="text-align: center; margin-bottom: 20px; color: var(--maroon);">The Process in Detail</h2>
-            <p style="text-align: center; max-width: 600px; margin: 0 auto 60px; color: #888;">A closer look at the intricate lace, industrial stitching, and technical development of the collection.</p>
-            <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/detail_lace_1.jpg" alt="Detail Lace">
+        <!-- Heritage Gown Section -->
+        <section class="theme-block">
+            <div class="theme-grid">
+                <div class="theme-assets reveal">
+                    <div class="asset-large"><img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Illustration"></div>
+                    <div class="asset-small"><img src="assets/victorianglam/moodboard_2.jpg" alt="Moodboard"></div>
                 </div>
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/detail_embroidery_1.jpg" alt="Detail Embroidery">
-                </div>
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/detail_sketch_1.jpg" alt="Detail Sketch">
-                </div>
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/heritage_gown_photo_2.jpg" alt="Heritage Photo">
-                </div>
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/lavender_gown_photo_2.jpg" alt="Lavender Photo">
-                </div>
-                <div class="portfolio-card">
-                    <img src="assets/victorianglam/maroon_ballgown_photo_3.jpg" alt="Maroon Photo">
+                <div class="theme-text reveal">
+                    <span class="section-tag" style="text-align: left;">Design I</span>
+                    <h2>Royal Victorian Heritage</h2>
+                    <p>The flagship of the collection, this tiered gown explores the rigid symmetry of 19th-century court dress. Built with industrial precision and a curiosity for historical layering, it bridges the gap between antiquity and high fashion.</p>
+                    <div class="model-gallery">
+                        <div class="model-card"><img src="assets/victorianglam/heritage_gown_photo_1.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/heritage_gown_photo_2.jpg" alt="Model"></div>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <footer style="padding: 60px 10%; background: var(--maroon); color: white; text-align: center;">
-        <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; letter-spacing: 2px;">NAJEEMA AFRIN</p>
-        <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">&copy; 2024 FASHION DESIGNER PORTFOLIO</p>
-    </footer>
+        <!-- Black Velvet Section -->
+        <section class="theme-block" style="background: #fafafa;">
+            <div class="theme-grid" style="grid-template-columns: 0.8fr 1.2fr;">
+                <div class="theme-text reveal">
+                    <span class="section-tag" style="text-align: left;">Design II</span>
+                    <h2>Midnight Sparkle: Black Velvet</h2>
+                    <p>A study in luxury and texture. This black velvet masterpiece features a beaded trim bodice and sparkle tulle layers. It represents the "Glam" in Victorian Glam, emphasizing high-contrast luxury and dramatic silhouettes.</p>
+                </div>
+                <div class="theme-assets reveal">
+                    <div class="asset-large"><img src="assets/victorianglam/black_velvet_illustration.jpg" alt="Illustration"></div>
+                    <div class="model-gallery" style="grid-column: span 2;">
+                        <div class="model-card"><img src="assets/victorianglam/black_velvet_photo_1.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/black_velvet_photo_2.jpg" alt="Model"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lavender Gown Section -->
+        <section class="theme-block">
+            <div class="theme-grid">
+                <div class="theme-assets reveal">
+                    <div class="asset-large"><img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Illustration"></div>
+                    <div class="model-gallery" style="grid-column: span 2; grid-template-columns: repeat(3, 1fr);">
+                        <div class="model-card"><img src="assets/victorianglam/lavender_gown_photo_1.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/lavender_gown_photo_2.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/lavender_gown_photo_3.jpg" alt="Model"></div>
+                    </div>
+                </div>
+                <div class="theme-text reveal">
+                    <span class="section-tag" style="text-align: left;">Design III</span>
+                    <h2>The Lavender Blossom</h2>
+                    <p>Balancing historical silhouettes with modern ethereal sparkle. This gown utilizes silver embroidery and delicate tulle, capturing the romanticism of the Victorian era through a fresh, contemporary lens.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Maroon Ballgown Section -->
+        <section class="theme-block" style="background: #fdf5f7;">
+            <div class="theme-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="theme-text reveal">
+                    <span class="section-tag" style="text-align: left;">Design IV</span>
+                    <h2>Maroon Velvet Majesty</h2>
+                    <p>Heavy velvet meets airy tulle in this commanding ballgown. Featuring matching industrial-grade gloves and a technical bodice construction, it showcases the rigorous construction standards of export-level fashion.</p>
+                </div>
+                <div class="theme-assets reveal">
+                    <div class="asset-large"><img src="assets/victorianglam/maroon_ballgown_illustration.jpg" alt="Illustration"></div>
+                    <div class="model-gallery" style="grid-column: span 2; grid-template-columns: repeat(3, 1fr);">
+                        <div class="model-card"><img src="assets/victorianglam/maroon_ballgown_photo_1.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/maroon_ballgown_photo_2.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/maroon_ballgown_photo_3.jpg" alt="Model"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Maroon Mermaid Section -->
+        <section class="theme-block">
+            <div class="theme-grid">
+                <div class="theme-assets reveal">
+                    <div class="asset-large"><img src="assets/victorianglam/maroon_mermaid_illustration.jpg" alt="Illustration"></div>
+                    <div class="model-gallery" style="grid-column: span 2; grid-template-columns: repeat(3, 1fr);">
+                        <div class="model-card"><img src="assets/victorianglam/maroon_mermaid_photo_1.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/maroon_mermaid_photo_2.jpg" alt="Model"></div>
+                        <div class="model-card"><img src="assets/victorianglam/maroon_mermaid_photo_3.jpg" alt="Model"></div>
+                    </div>
+                </div>
+                <div class="theme-text reveal">
+                    <span class="section-tag" style="text-align: left;">Design V</span>
+                    <h2>The Modern Mermaid</h2>
+                    <p>A fusion of Victorian luxury and 21st-century silhouettes. The diamond mesh pattern overlay creates a dynamic play of light, proving that heritage colors like maroon can be radically modern.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <footer class="download-footer">
+            <h2>Experience the Full Portfolio</h2>
+            <p style="margin-bottom: 40px; opacity: 0.8;">Download the high-resolution Victorian Glam portfolio as a professional PDF document.</p>
+            <button class="btn-download" onclick="window.print()">Download Portfolio PDF</button>
+        </footer>
+    </div>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -228,8 +268,8 @@
                 },
                 opacity: 0,
                 y: 50,
-                duration: 1,
-                ease: "power2.out"
+                duration: 1.2,
+                ease: "power3.out"
             });
         });
     </script>
