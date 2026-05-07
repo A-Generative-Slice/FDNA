@@ -481,12 +481,13 @@ section { padding: 100px 10%; }
 
 /* --- Mobile Responsive Optimizations --- */
 @media (max-width: 768px) {
-    nav { 
-        padding: 0 15px; 
-        width: 95%; 
-        top: 10px; 
-        height: 55px;
-        border-radius: 30px;
+    nav {
+        width: auto;
+        left: 15px;
+        right: 15px;
+        transform: none;
+        padding: 0 20px;
+        height: 50px;
     }
     
     .nav-links { 
