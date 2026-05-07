@@ -26,7 +26,7 @@
 
         /* --- Header --- */
         .intro-header {
-            padding: 120px 5% 60px;
+            padding: 140px 5% 40px;
             background: #fdfbf7;
             text-align: center;
         }
@@ -45,19 +45,34 @@
         }
 
         .cover-section {
-            width: 80%;
-            max-width: 1000px;
+            width: 70%;
+            max-width: 500px;
             margin: 0 auto 60px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
         }
         .cover-section img { 
             width: 100%; 
-            aspect-ratio: 16 / 9; /* Consistent wide ratio */
-            object-fit: cover;
-            object-position: center;
+            aspect-ratio: 2 / 3; 
+            object-fit: cover; 
             display: block; 
+        }
+
+        .detail-item-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+        }
+        .detail-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         /* --- Story Blocks --- */
@@ -107,8 +122,8 @@
         .img-box.large { grid-column: span 2; }
         .img-box img { 
             width: 100%; 
-            aspect-ratio: 4 / 3; /* Consistent ratio for illustrations */
-            object-fit: contain; /* Ensure no sketches are cut off */
+            aspect-ratio: 2 / 3; 
+            object-fit: contain; 
             display: block; 
             background: #fff;
         }
@@ -117,42 +132,53 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         .model-gallery img {
             width: 100%;
-            aspect-ratio: 3 / 4; /* Professional model photo ratio */
+            aspect-ratio: 2 / 3;
             object-fit: cover;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
+        /* --- Mobile --- */
         @media (max-width: 768px) {
+            nav { padding: 10px 20px; height: 60px; }
+            .nav-links { display: flex !important; }
             .intro-header { padding: 100px 20px 40px; }
-            .intro-header h1 { font-size: 2.5rem; }
-            .cover-section { width: 95%; border-radius: 15px; }
-            .cover-section img { max-height: 300px; }
+            .intro-header h1 { font-size: 2.2rem; }
+            .cover-section { width: 90%; margin-bottom: 40px; }
+            .detail-item-grid { margin-bottom: 60px; }
             .design-block { padding: 60px 20px; }
             .image-grid { grid-template-columns: 1fr; gap: 20px; }
-            .text-content h2 { font-size: 2rem; }
-            .model-gallery { grid-template-columns: 1fr 1fr; }
-            .model-gallery img { height: 300px; }
+            .text-content h2 { font-size: 1.8rem; }
         }
 
         @media print {
-            nav, .download-footer { display: none !important; }
-            .design-block { page-break-after: always; padding: 40px !important; }
-            .content-wrapper { gap: 30px; }
-            .img-box { box-shadow: none; border: 1px solid #eee; }
+            nav, .download-footer, .section-tag { display: none !important; }
+            .intro-header { padding: 40px !important; }
+            .cover-section { width: 90mm; margin: 20px auto !important; }
+            .detail-item-grid { page-break-after: always; margin-bottom: 0; }
+            .design-block { 
+                page-break-before: always; 
+                padding: 20px !important; 
+                height: 290mm;
+                border: none;
+                background: white !important;
+            }
+            .content-wrapper { gap: 20px; }
+            .img-box img { max-height: 110mm; }
+            .model-gallery img { height: 90mm; }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">NAJEEMA AFRIN</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
+        <div class="nav-links" style="display: flex;">
+            <a href="index.html" style="font-weight: 700; color: var(--maroon); text-decoration: none; letter-spacing: 1px;">BACK TO HOME</a>
         </div>
     </nav>
 
@@ -166,6 +192,12 @@
         <section class="cover-section reveal">
             <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Moodboard">
         </section>
+
+        <div class="detail-item-grid reveal">
+            <div class="detail-item"><img src="assets/victorianglam/detail_embroidery_1.jpg"></div>
+            <div class="detail-item"><img src="assets/victorianglam/detail_lace_1.jpg"></div>
+            <div class="detail-item"><img src="assets/victorianglam/detail_sketch_1.jpg"></div>
+        </div>
 
         <!-- Design I -->
         <section class="design-block">
@@ -247,7 +279,7 @@
                     <div class="img-box large"><img src="assets/victorianglam/maroon_mermaid_illustration.jpg"></div>
                 </div>
                 <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/maroon_mermaid_photo_1.jpg">
+                    <img src="assets/victorianglam/maroon_mermaid_photo_3.jpg">
                     <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
                 </div>
             </div>
