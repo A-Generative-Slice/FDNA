@@ -47,36 +47,40 @@ nav {
     transform: translateX(-50%);
     width: 90%;
     max-width: 1200px;
-    padding: 15px 40px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 30px;
     border-radius: 100px;
-    z-index: 1000;
-    background: var(--white-glass);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .logo {
-    font-weight: 800;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
     color: var(--maroon);
-    letter-spacing: 3px;
+    text-transform: uppercase;
 }
 
 .nav-links {
     display: flex;
-    gap: 35px;
+    gap: 30px;
 }
 
 .nav-links a {
-    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--charcoal);
     font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    position: relative;
+    transition: var(--transition);
 }
 
 .nav-links a::after {
@@ -440,16 +444,56 @@ section { padding: 100px 10%; }
 @media (max-width: 768px) {
     nav { 
         padding: 0 15px; 
-        width: 92%; 
-        top: 15px; 
-        height: 60px;
-        border-radius: 40px;
+        width: 95%; 
+        top: 10px; 
+        height: 55px;
+        border-radius: 30px;
+    }
+    
+    .nav-links { 
+        display: none !important; 
+    }
+    
+    .mobile-menu-btn { 
+        display: flex; 
     }
     
     .logo { 
-        font-size: 0.9rem; 
+        font-size: 0.85rem; 
         letter-spacing: 1px; 
     }
+
+    /* Mobile Nav Overlay */
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--maroon);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        z-index: 1500;
+        transform: translateY(-100%);
+        transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .mobile-nav.active {
+        transform: translateY(0);
+    }
+
+    .mobile-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+}
     
     .profile-frame {
         width: 180px;

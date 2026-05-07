@@ -20,122 +20,148 @@
 
         .story-container {
             width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Guarantee centering */
+        }
+
+        /* --- Refined Nav for Story --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            border-radius: 100px;
+            z-index: 3000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
 
         /* --- Header --- */
         .intro-header {
-            padding: 140px 5% 40px;
-            background: #fdfbf7;
+            padding: 160px 5% 40px;
+            width: 100%;
+            max-width: 1200px;
             text-align: center;
+            margin: 0 auto;
         }
         .intro-header h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: clamp(2rem, 6vw, 4rem);
             color: var(--maroon);
             margin-bottom: 20px;
             letter-spacing: 2px;
         }
         .intro-header p {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
             color: #666;
             line-height: 1.8;
         }
 
-        .cover-section {
-            width: 70%;
-            max-width: 500px;
-            margin: 0 auto 60px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
-        }
-        .cover-section img { 
-            width: 100%; 
-            aspect-ratio: 2 / 3; 
-            object-fit: cover; 
-            display: block; 
+        .hero-showcase {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto 100px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: center;
         }
 
-        .detail-item-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 800px;
-            margin: 0 auto 100px;
-            padding: 0 5%;
+        .hero-main {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+        .hero-main img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         .detail-item img {
             width: 100%;
             aspect-ratio: 1 / 1;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* --- Story Blocks --- */
+        /* --- Balanced Design Blocks --- */
         .design-block {
             padding: 100px 5%;
             width: 100%;
-            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: center;
         }
         .design-block:nth-child(even) { background: #fafafa; }
 
         .content-wrapper {
             max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-        }
-
-        .text-content h2 {
-            font-size: 2.8rem;
-            color: var(--maroon);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .text-content p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #444;
-            max-width: 900px;
-            margin: 0 auto 40px;
-            text-align: center;
-        }
-
-        .image-grid {
+            width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            width: 100%;
+            gap: 80px;
+            align-items: center;
         }
 
-        .img-box {
+        .reverse .content-wrapper { direction: rtl; }
+        .reverse .text-content { direction: ltr; }
+
+        .text-content h2 {
+            font-size: 2.5rem;
+            color: var(--maroon);
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+        .text-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 35px;
+        }
+
+        .asset-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .illustration-card {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             background: #fff;
+            padding: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
-        .img-box.large { grid-column: span 2; }
-        .img-box img { 
-            width: 100%; 
-            aspect-ratio: 2 / 3; 
-            object-fit: contain; 
-            display: block; 
-            background: #fff;
+        .illustration-card img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: contain;
+            display: block;
         }
 
-        .model-gallery {
+        .gallery-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
         }
-        .model-gallery img {
+        .gallery-row img {
             width: 100%;
             aspect-ratio: 2 / 3;
             object-fit: cover;
@@ -143,42 +169,37 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
-        /* --- Mobile --- */
+        /* --- Mobile Lookbook --- */
         @media (max-width: 768px) {
-            nav { padding: 10px 20px; height: 60px; }
-            .nav-links { display: flex !important; }
-            .intro-header { padding: 100px 20px 40px; }
-            .intro-header h1 { font-size: 2.2rem; }
-            .cover-section { width: 90%; margin-bottom: 40px; }
-            .detail-item-grid { margin-bottom: 60px; }
-            .design-block { padding: 60px 20px; }
-            .image-grid { grid-template-columns: 1fr; gap: 20px; }
+            nav { width: 95%; height: 50px; padding: 0 15px; top: 10px; }
+            .logo { font-size: 0.8rem; }
+            .nav-links a { font-size: 0.7rem; }
+
+            .intro-header { padding: 120px 20px 30px; }
+            .hero-showcase { grid-template-columns: 1fr; margin-bottom: 60px; }
+            .content-wrapper { grid-template-columns: 1fr; gap: 40px; }
             .text-content h2 { font-size: 1.8rem; }
+            .design-block { padding: 60px 20px; }
         }
 
         @media print {
             nav, .download-footer, .section-tag { display: none !important; }
             .intro-header { padding: 40px !important; }
-            .cover-section { width: 90mm; margin: 20px auto !important; }
-            .detail-item-grid { page-break-after: always; margin-bottom: 0; }
-            .design-block { 
-                page-break-before: always; 
-                padding: 20px !important; 
-                height: 290mm;
-                border: none;
-                background: white !important;
-            }
-            .content-wrapper { gap: 20px; }
-            .img-box img { max-height: 110mm; }
-            .model-gallery img { height: 90mm; }
+            .hero-showcase { page-break-after: always; display: block; }
+            .hero-main { width: 100mm; margin: 0 auto; }
+            .hero-details { display: none; }
+            .design-block { page-break-before: always; height: 290mm; padding: 20px !important; display: block; }
+            .content-wrapper { display: block; }
+            .asset-stack { width: 120mm; margin: 0 auto; }
+            .text-content { text-align: center; margin-bottom: 20px; }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">NAJEEMA AFRIN</div>
-        <div class="nav-links" style="display: flex;">
-            <a href="index.html" style="font-weight: 700; color: var(--maroon); text-decoration: none; letter-spacing: 1px;">BACK TO HOME</a>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: var(--maroon); font-weight: 700;">HOME</a>
         </div>
     </nav>
 
@@ -186,109 +207,107 @@
         <header class="intro-header">
             <span class="section-tag">High Fashion Collection</span>
             <h1>Victorian Glam</h1>
-            <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. This portfolio showcases the technical precision, textile curiosity, and artistic vision of Najeema Afrin.</p>
+            <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
         </header>
 
-        <section class="cover-section reveal">
-            <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Moodboard">
+        <section class="hero-showcase reveal">
+            <div class="hero-main">
+                <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Cover">
+            </div>
+            <div class="hero-details">
+                <div class="detail-item"><img src="assets/victorianglam/detail_embroidery_1.jpg"></div>
+                <div class="detail-item"><img src="assets/victorianglam/detail_lace_1.jpg"></div>
+            </div>
         </section>
 
-        <div class="detail-item-grid reveal">
-            <div class="detail-item"><img src="assets/victorianglam/detail_embroidery_1.jpg"></div>
-            <div class="detail-item"><img src="assets/victorianglam/detail_lace_1.jpg"></div>
-            <div class="detail-item"><img src="assets/victorianglam/detail_sketch_1.jpg"></div>
-        </div>
-
-        <!-- Design I -->
+        <!-- Design I: Heritage Gown -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>Royal Victorian Heritage</h2>
-                    <p>The foundation of this collection explores the architectural volume of the Victorian era. By synthesizing tiered silk layers with modern construction, this design achieves a balance of historical weight and contemporary movement.</p>
+                    <p>Exploring architectural volume and tiered silk layers. This design achieves a balance of historical weight and contemporary movement.</p>
+                    <div class="gallery-row">
+                        <img src="assets/victorianglam/heritage_gown_photo_1.jpg">
+                        <img src="assets/victorianglam/heritage_gown_photo_2.jpg">
+                    </div>
                 </div>
-                <div class="image-grid reveal">
-                    <div class="img-box"><img src="assets/victorianglam/heritage_gown_illustration.jpg"></div>
-                    <div class="img-box"><img src="assets/victorianglam/moodboard_2.jpg"></div>
-                </div>
-                <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/heritage_gown_photo_1.jpg">
-                    <img src="assets/victorianglam/heritage_gown_photo_2.jpg">
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/victorianglam/heritage_gown_illustration.jpg"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Design II -->
-        <section class="design-block">
+        <!-- Design II: Black Velvet -->
+        <section class="design-block reverse">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>Midnight Sparkle: Black Velvet</h2>
-                    <p>A study in the interplay between light and dark. This design features high-pigment black velvet contrasted against ethereal sparkle tulle, representing the dramatic 'Glam' aesthetic of the collection.</p>
+                    <p>A study in high-pigment black velvet contrasted against ethereal sparkle tulle, representing the dramatic 'Glam' aesthetic.</p>
+                    <div class="gallery-row">
+                        <img src="assets/victorianglam/black_velvet_photo_1.jpg">
+                        <img src="assets/victorianglam/black_velvet_photo_2.jpg">
+                    </div>
                 </div>
-                <div class="image-grid reveal">
-                    <div class="img-box large"><img src="assets/victorianglam/black_velvet_illustration.jpg"></div>
-                </div>
-                <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/black_velvet_photo_1.jpg">
-                    <img src="assets/victorianglam/black_velvet_photo_2.jpg">
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/victorianglam/black_velvet_illustration.jpg"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Design III -->
+        <!-- Design III: Lavender Blossom -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>The Lavender Blossom</h2>
-                    <p>Romanticism brought to life through silver embroidery and delicate sheer layers. The lavender tones provide a soft counterpoint to the heavier velvet pieces, rounding out the emotional arc of the collection.</p>
+                    <p>Romanticism brought to life through silver embroidery and delicate sheer layers, providing a soft counterpoint to the velvet pieces.</p>
+                    <div class="gallery-row">
+                        <img src="assets/victorianglam/lavender_gown_photo_1.jpg">
+                        <img src="assets/victorianglam/lavender_gown_photo_2.jpg">
+                    </div>
                 </div>
-                <div class="image-grid reveal">
-                    <div class="img-box large"><img src="assets/victorianglam/lavender_gown_illustration.jpg"></div>
-                </div>
-                <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/lavender_gown_photo_1.jpg">
-                    <img src="assets/victorianglam/lavender_gown_photo_2.jpg">
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/victorianglam/lavender_gown_illustration.jpg"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Design IV -->
-        <section class="design-block">
+        <!-- Design IV: Maroon Majesty -->
+        <section class="design-block reverse">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>Maroon Velvet Majesty</h2>
-                    <p>Showcasing industrial construction standards. This ballgown utilizes heavy velvet and a technical bodice for structural integrity, designed to meet the rigorous demands of the global export market.</p>
+                    <p>Showcasing industrial construction standards with heavy velvet and a technical bodice for structural integrity.</p>
+                    <div class="gallery-row">
+                        <img src="assets/victorianglam/maroon_ballgown_photo_1.jpg">
+                        <img src="assets/victorianglam/maroon_ballgown_photo_2.jpg">
+                    </div>
                 </div>
-                <div class="image-grid reveal">
-                    <div class="img-box large"><img src="assets/victorianglam/maroon_ballgown_illustration.jpg"></div>
-                </div>
-                <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/maroon_ballgown_photo_1.jpg">
-                    <img src="assets/victorianglam/maroon_ballgown_photo_2.jpg">
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/victorianglam/maroon_ballgown_illustration.jpg"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Design V -->
+        <!-- Design V: Modern Mermaid -->
         <section class="design-block">
             <div class="content-wrapper">
                 <div class="text-content reveal">
                     <h2>The Modern Mermaid</h2>
-                    <p>A fusion of Victorian luxury and 21st-century silhouettes. The diamond mesh pattern overlay creates a dynamic play of light, proving that heritage colors can be radically modern.</p>
+                    <p>A fusion of Victorian luxury and 21st-century silhouettes. The diamond mesh pattern overlay creates a dynamic play of light.</p>
+                    <div class="gallery-row">
+                        <img src="assets/victorianglam/maroon_mermaid_photo_3.jpg">
+                        <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
+                    </div>
                 </div>
-                <div class="image-grid reveal">
-                    <div class="img-box large"><img src="assets/victorianglam/maroon_mermaid_illustration.jpg"></div>
-                </div>
-                <div class="model-gallery reveal">
-                    <img src="assets/victorianglam/maroon_mermaid_photo_3.jpg">
-                    <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/victorianglam/maroon_mermaid_illustration.jpg"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white;">
-            <h2>Download Professional Portfolio</h2>
-            <p style="margin-bottom: 30px; opacity: 0.8;">Get the high-density version of this collection as a PDF.</p>
+        <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
+            <h2>Experience the Full Portfolio</h2>
+            <p style="margin-bottom: 30px; opacity: 0.8;">Download the high-density version for your records.</p>
             <button onclick="window.print()" style="padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Export PDF</button>
         </footer>
     </div>
