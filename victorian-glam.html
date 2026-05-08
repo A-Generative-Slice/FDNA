@@ -200,14 +200,15 @@
             /* Hide UI Elements on Print */
             nav, .download-footer, .section-tag { display: none !important; }
             
-            body, html { width: auto; height: auto; background: white; }
+            body, html { width: 100%; height: 100%; background: white; margin: 0; padding: 0; }
 
             /* Define the printable slides */
             .cover-page-wrapper, .design-block {
-                width: 100vw !important;
-                height: 100vh !important;
+                width: 100% !important;
+                height: 98vh !important; /* Adjusted from 100vh to prevent browser margin overflow causing a blank first page */
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
+                page-break-before: avoid !important;
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: center !important;
@@ -215,16 +216,16 @@
                 background: white !important;
                 border: none !important;
                 margin: 0 !important;
-                padding: 5vh 5vw !important; /* Internal padding for the slide */
+                padding: 2vh 5vw !important; /* Internal padding for the slide */
                 box-sizing: border-box !important;
             }
 
             /* Slide 1 Specifics */
-            .intro-header { padding: 0 !important; margin-bottom: 30px !important; }
+            .intro-header { padding: 0 !important; margin-bottom: 20px !important; }
             .hero-showcase { margin: 0 !important; width: 100% !important; grid-template-columns: 1fr 1fr !important; gap: 30px !important; }
-            .hero-main img { height: 60vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
+            .hero-main img { height: 55vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
             .hero-details { grid-template-columns: 1fr 1fr !important; gap: 15px !important; }
-            .hero-details img { height: 30vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
+            .hero-details img { height: 26vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
 
             /* Slides 2-6 Specifics */
             .content-wrapper { 
@@ -243,8 +244,8 @@
             .illustration-card img { height: 75vh !important; box-shadow: none; border: 1px solid #eee; }
             .gallery-row img { height: 35vh !important; box-shadow: none; }
             
-            .text-group h2 { font-size: 28pt !important; margin-bottom: 10px !important; color: #000 !important; }
-            .text-group p { font-size: 14pt !important; line-height: 1.5 !important; color: #333 !important; }
+            .text-group h2 { font-size: 26pt !important; margin-bottom: 10px !important; color: #000 !important; }
+            .text-group p { font-size: 13pt !important; line-height: 1.5 !important; color: #333 !important; }
         }
     </style>
 </head>
