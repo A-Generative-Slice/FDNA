@@ -516,22 +516,25 @@
                 status.textContent = `Rendering slide ${i + 1} of ${totalSlides}...`;
                 const slide = slides[i];
 
-                // Temporarily force desktop layout for rendering
-                slide.style.cssText = 'width: 1400px !important; padding: 50px !important; background: white !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;';
-                // Remove nav padding from cover page
+                // Force a strict 16:9 aspect ratio (1400x787) for capture to prevent stretching
+                slide.style.cssText = 'width: 1400px !important; height: 787px !important; padding: 60px !important; background: white !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; overflow: hidden !important; position: relative !important;';
+                
+                // Hide nav padding from cover page specifically during export
                 const coverLayout = slide.querySelector('.cover-layout');
                 let oldPadding = '';
                 if (coverLayout) {
                     oldPadding = coverLayout.style.padding;
-                    coverLayout.style.padding = '30px 5% 30px';
+                    coverLayout.style.padding = '20px 5% 20px';
                 }
 
                 const canvas = await html2canvas(slide, {
-                    scale: 3,
+                    scale: 2,
                     useCORS: true,
                     backgroundColor: '#ffffff',
                     width: 1400,
-                    windowWidth: 1400
+                    height: 787,
+                    windowWidth: 1400,
+                    windowHeight: 787
                 });
 
                 // Reset styles
@@ -539,28 +542,13 @@
                 if (coverLayout) coverLayout.style.padding = oldPadding;
 
                 const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                const pageW = 297;
-                const pageH = 167;
-                const imgRatio = canvas.width / canvas.height;
-                const pageRatio = pageW / pageH;
-
-                let drawW, drawH, drawX, drawY;
-                if (imgRatio > pageRatio) {
-                    drawW = pageW;
-                    drawH = pageW / imgRatio;
-                    drawX = 0;
-                    drawY = (pageH - drawH) / 2;
-                } else {
-                    drawH = pageH;
-                    drawW = pageH * imgRatio;
-                    drawX = (pageW - drawW) / 2;
-                    drawY = 0;
-                }
-
+                
                 if (i > 0) pdf.addPage([297, 167], 'landscape');
+                
+                // Since capture is exactly 16:9, we can fill the page exactly without stretching
                 pdf.setFillColor(255, 255, 255);
-                pdf.rect(0, 0, pageW, pageH, 'F');
-                pdf.addImage(imgData, 'JPEG', drawX, drawY, drawW, drawH);
+                pdf.rect(0, 0, 297, 167, 'F');
+                pdf.addImage(imgData, 'JPEG', 0, 0, 297, 167);
             }
 
             pdf.save('Victorian_Glam_Portfolio.pdf');
