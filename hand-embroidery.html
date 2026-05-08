@@ -191,9 +191,9 @@
             .story-container { margin: 0 !important; padding: 0 !important; }
 
             .cover-page-wrapper, .design-block, .thank-you-slide {
-                width: 100% !important;
-                height: auto !important; 
-                min-height: 90vh !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 page-break-before: avoid !important;
@@ -204,8 +204,9 @@
                 background: white !important;
                 border: none !important;
                 margin: 0 !important;
-                padding: 2vh 5vw !important; 
+                padding: 4vh 5vw !important; 
                 box-sizing: border-box !important;
+                overflow: hidden !important;
             }
 
             .intro-header { padding: 0 !important; margin-bottom: 20px !important; }
