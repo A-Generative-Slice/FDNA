@@ -343,18 +343,25 @@
     </nav>
 
     <div class="story-container">
-        <!-- Slide 1: Introduction & Moodboard Wrapper -->
+        <!-- Slide 1: Cover Page -->
         <div class="cover-page-wrapper">
-            <div class="cover-layout" style="display: flex; flex-direction: row; align-items: center; gap: 40px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 120px 5% 40px;">
-                <div class="cover-text" style="flex: 1; text-align: left;">
-                    <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); color: var(--maroon); margin-bottom: 20px; letter-spacing: 2px; line-height: 1.1;">Victorian Glam</h1>
-                    <p style="font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 450px;">An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
-                    <p style="font-size: 0.8rem; color: var(--maroon); margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">By Najeema Afrin</p>
+            <div class="cover-layout" style="display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 50px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 140px 5% 60px;">
+                <div class="cover-text">
+                    <div style="width: 50px; height: 3px; background: var(--gold); margin-bottom: 25px;"></div>
+                    <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 4.5rem); color: var(--maroon); margin-bottom: 15px; letter-spacing: 1px; line-height: 1.05;">Victorian<br>Glam</h1>
+                    <p style="font-size: 1rem; color: #777; line-height: 1.8; max-width: 400px; margin-bottom: 25px;">An immersive journey through 19th-century royal silhouettes reimagined for the modern era.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="assets/profile%20pic.jpg" alt="Najeema Afrin" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--maroon); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin: 0;">Najeema Afrin</p>
+                            <p style="font-size: 0.65rem; color: #999; margin: 2px 0 0;">Fashion Design Portfolio</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cover-images" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                    <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Cover" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; grid-row: 1 / 3;">
-                    <img src="assets/victorianglam/detail_embroidery_1.jpg" style="width: 100%; height: 134px; object-fit: cover; border-radius: 12px;">
-                    <img src="assets/victorianglam/detail_lace_1.jpg" style="width: 100%; height: 134px; object-fit: cover; border-radius: 12px;">
+                <div class="cover-images" style="display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; height: 380px;">
+                    <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; grid-row: 1 / 3;">
+                    <img src="assets/victorianglam/detail_embroidery_1.jpg" alt="Detail 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                    <img src="assets/victorianglam/detail_lace_1.jpg" alt="Detail 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
                 </div>
             </div>
         </div>
@@ -500,24 +507,28 @@
                 const slide = slides[i];
 
                 // Temporarily force desktop layout for rendering
-                slide.style.width = '1200px';
-                slide.style.padding = '40px';
-                slide.style.background = 'white';
+                slide.style.cssText = 'width: 1400px !important; padding: 50px !important; background: white !important; display: flex !important; flex-direction: column !important; justify-content: center !important;';
+                // Remove nav padding from cover page
+                const coverLayout = slide.querySelector('.cover-layout');
+                let oldPadding = '';
+                if (coverLayout) {
+                    oldPadding = coverLayout.style.padding;
+                    coverLayout.style.padding = '30px 5% 30px';
+                }
 
                 const canvas = await html2canvas(slide, {
-                    scale: 2,
+                    scale: 3,
                     useCORS: true,
                     backgroundColor: '#ffffff',
-                    width: 1200,
-                    windowWidth: 1200
+                    width: 1400,
+                    windowWidth: 1400
                 });
 
                 // Reset styles
-                slide.style.width = '';
-                slide.style.padding = '';
-                slide.style.background = '';
+                slide.style.cssText = '';
+                if (coverLayout) coverLayout.style.padding = oldPadding;
 
-                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
                 const pageW = 297;
                 const pageH = 167;
                 const imgRatio = canvas.width / canvas.height;

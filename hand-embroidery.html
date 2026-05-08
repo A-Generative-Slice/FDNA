@@ -310,16 +310,23 @@
     </nav>
 
     <div class="story-container">
-        <!-- Slide 1: Introduction -->
+        <!-- Slide 1: Cover Page -->
         <div class="cover-page-wrapper">
-            <div class="cover-layout" style="display: flex; flex-direction: row; align-items: center; gap: 40px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 120px 5% 40px;">
-                <div class="cover-text" style="flex: 1; text-align: left;">
-                    <h1 style="font-size: clamp(2rem, 5vw, 3.2rem); color: var(--maroon); margin-bottom: 20px; letter-spacing: 2px; line-height: 1.1;">Hand Embroidery &amp; Textile Arts</h1>
-                    <p style="font-size: 1.05rem; color: #666; line-height: 1.8; max-width: 450px;">Hand embroidery is the art of decorative stitching on fabric with needle and thread. It adds a decorative element to quilts, garments, and accessories, offering a unique "human touch" that machine work cannot replicate.</p>
-                    <p style="font-size: 0.8rem; color: var(--maroon); margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">By Najeema Afrin</p>
+            <div class="cover-layout" style="display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: 50px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 140px 5% 60px;">
+                <div class="cover-text">
+                    <div style="width: 50px; height: 3px; background: var(--gold); margin-bottom: 25px;"></div>
+                    <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--maroon); margin-bottom: 15px; letter-spacing: 1px; line-height: 1.1;">Hand Embroidery<br>&amp; Textile Arts</h1>
+                    <p style="font-size: 0.95rem; color: #777; line-height: 1.8; max-width: 400px; margin-bottom: 25px;">The art of decorative stitching on fabric with needle and thread. A unique "human touch" that machine work cannot replicate.</p>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <img src="assets/profile%20pic.jpg" alt="Najeema Afrin" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);">
+                        <div>
+                            <p style="font-size: 0.75rem; color: var(--maroon); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin: 0;">Najeema Afrin</p>
+                            <p style="font-size: 0.65rem; color: #999; margin: 2px 0 0;">Textile Design Portfolio</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cover-images" style="flex: 1; display: flex; align-items: center; justify-content: center;">
-                    <img src="assets/embroidry/page-000.jpg" alt="Hand Embroidery Art" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.08);">
+                <div class="cover-images" style="display: flex; align-items: center; justify-content: center;">
+                    <img src="assets/embroidry/page-000.jpg" alt="Hand Embroidery Art" style="width: 100%; height: 380px; object-fit: cover; border-radius: 15px;">
                 </div>
             </div>
         </div>
@@ -677,24 +684,27 @@
                 const slide = slides[i];
 
                 // Temporarily force desktop layout for rendering
-                slide.style.width = '1200px';
-                slide.style.padding = '40px';
-                slide.style.background = 'white';
+                slide.style.cssText = 'width: 1400px !important; padding: 50px !important; background: white !important; display: flex !important; flex-direction: column !important; justify-content: center !important;';
+                const coverLayout = slide.querySelector('.cover-layout');
+                let oldPadding = '';
+                if (coverLayout) {
+                    oldPadding = coverLayout.style.padding;
+                    coverLayout.style.padding = '30px 5% 30px';
+                }
 
                 const canvas = await html2canvas(slide, {
-                    scale: 2,
+                    scale: 3,
                     useCORS: true,
                     backgroundColor: '#ffffff',
-                    width: 1200,
-                    windowWidth: 1200
+                    width: 1400,
+                    windowWidth: 1400
                 });
 
                 // Reset styles
-                slide.style.width = '';
-                slide.style.padding = '';
-                slide.style.background = '';
+                slide.style.cssText = '';
+                if (coverLayout) coverLayout.style.padding = oldPadding;
 
-                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
                 const pageW = 297;
                 const pageH = 167;
                 const imgRatio = canvas.width / canvas.height;
