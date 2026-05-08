@@ -101,8 +101,14 @@ nav {
 }
 
 @media print {
-    /* Hide all main website content during print */
-    nav, .mobile-menu-btn, .mobile-nav, header, section, footer, #project-modal {
+    /* Hide all main website content during print - ONLY on homepage */
+    body:not(.portfolio-page) nav, 
+    body:not(.portfolio-page) .mobile-menu-btn, 
+    body:not(.portfolio-page) .mobile-nav, 
+    body:not(.portfolio-page) header, 
+    body:not(.portfolio-page) section, 
+    body:not(.portfolio-page) footer, 
+    body:not(.portfolio-page) #project-modal {
         display: none !important;
     }
     
@@ -358,7 +364,14 @@ section { padding: 100px 10%; }
         margin: 0 !important;
     }
 
-    nav, footer, .hero, .btn-explore, .btn-primary, .section-tag, .portfolio-grid, button {
+    body:not(.portfolio-page) nav, 
+    body:not(.portfolio-page) footer, 
+    body:not(.portfolio-page) .hero, 
+    body:not(.portfolio-page) .btn-explore, 
+    body:not(.portfolio-page) .btn-primary, 
+    body:not(.portfolio-page) .section-tag, 
+    body:not(.portfolio-page) .portfolio-grid, 
+    body:not(.portfolio-page) button {
         display: none !important;
     }
 
