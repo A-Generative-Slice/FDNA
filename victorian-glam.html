@@ -393,13 +393,17 @@
                     <p>Exploring architectural volume and tiered silk layers. This design achieves a balance of historical weight and contemporary movement.</p>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card">
-                        <img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Heritage Gown Illustration">
+                    <div class="illustration-card" style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.05); overflow: hidden; height: 450px;">
+                        <img src="assets/victorianglam/heritage_gown_illustration.jpg" alt="Heritage Gown Illustration" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
                     </div>
                 </div>
                 <div class="gallery-row reveal">
-                    <img src="assets/victorianglam/heritage_gown_photo_1.jpg">
-                    <img src="assets/victorianglam/heritage_gown_photo_2.jpg">
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/heritage_gown_photo_1.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/heritage_gown_photo_2.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
                 </div>
             </div>
         </section>
@@ -412,13 +416,17 @@
                     <p>A study in high-pigment black velvet contrasted against ethereal sparkle tulle, representing the dramatic 'Glam' aesthetic.</p>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card">
-                        <img src="assets/victorianglam/black_velvet_illustration.jpg" alt="Black Velvet Illustration">
+                    <div class="illustration-card" style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.05); overflow: hidden; height: 450px;">
+                        <img src="assets/victorianglam/black_velvet_illustration.jpg" alt="Black Velvet Illustration" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
                     </div>
                 </div>
                 <div class="gallery-row reveal">
-                    <img src="assets/victorianglam/black_velvet_photo_1.jpg">
-                    <img src="assets/victorianglam/black_velvet_photo_2.jpg">
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/black_velvet_photo_1.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/black_velvet_photo_2.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
                 </div>
             </div>
         </section>
@@ -431,13 +439,17 @@
                     <p>Romanticism brought to life through silver embroidery and delicate sheer layers, providing a soft counterpoint to the velvet pieces.</p>
                 </div>
                 <div class="asset-stack reveal">
-                    <div class="illustration-card">
-                        <img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Lavender Gown Illustration">
+                    <div class="illustration-card" style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 15px 30px rgba(0,0,0,0.05); overflow: hidden; height: 450px;">
+                        <img src="assets/victorianglam/lavender_gown_illustration.jpg" alt="Lavender Gown Illustration" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
                     </div>
                 </div>
                 <div class="gallery-row reveal">
-                    <img src="assets/victorianglam/lavender_gown_photo_1.jpg">
-                    <img src="assets/victorianglam/lavender_gown_photo_2.jpg">
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/lavender_gown_photo_1.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 15px; overflow: hidden; height: 280px;">
+                        <img src="assets/victorianglam/lavender_gown_photo_2.jpg" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;">
+                    </div>
                 </div>
             </div>
         </section>
@@ -518,6 +530,26 @@
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [297, 167] });
 
+            // INJECT STRETCH PROTECTION: Force all images to keep natural proportions during capture
+            const styleFix = document.createElement('style');
+            styleFix.innerHTML = `
+                .illustration-card img, .gallery-row img {
+                    width: auto !important;
+                    height: auto !important;
+                    max-width: 100% !important;
+                    max-height: 100% !important;
+                    object-fit: contain !important;
+                    display: block !important;
+                    margin: 0 auto !important;
+                }
+                .illustration-card, .gallery-row {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+            `;
+            document.head.appendChild(styleFix);
+
             const slides = document.querySelectorAll('.cover-page-wrapper, .design-block, .thank-you-slide');
             const totalSlides = slides.length;
 
@@ -559,6 +591,9 @@
                 pdf.rect(0, 0, 297, 167, 'F');
                 pdf.addImage(imgData, 'JPEG', 0, 0, 297, 167);
             }
+
+            // Remove the temporary style fix
+            document.head.removeChild(styleFix);
 
             pdf.save('Victorian_Glam_Portfolio.pdf');
 

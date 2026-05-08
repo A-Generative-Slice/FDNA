@@ -688,6 +688,26 @@
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [297, 167] });
 
+            // INJECT STRETCH PROTECTION: Force all images to keep natural proportions during capture
+            const styleFix = document.createElement('style');
+            styleFix.innerHTML = `
+                .illustration-card img, .gallery-row img {
+                    width: auto !important;
+                    height: auto !important;
+                    max-width: 100% !important;
+                    max-height: 100% !important;
+                    object-fit: contain !important;
+                    display: block !important;
+                    margin: 0 auto !important;
+                }
+                .illustration-card, .gallery-row {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                }
+            `;
+            document.head.appendChild(styleFix);
+
             const slides = document.querySelectorAll('.cover-page-wrapper, .design-block, .thank-you-slide');
             const totalSlides = slides.length;
 
@@ -728,6 +748,9 @@
                 pdf.rect(0, 0, 297, 167, 'F');
                 pdf.addImage(imgData, 'JPEG', 0, 0, 297, 167);
             }
+
+            // Remove the temporary style fix
+            document.head.removeChild(styleFix);
 
             pdf.save('Hand_Embroidery_Portfolio.pdf');
 
