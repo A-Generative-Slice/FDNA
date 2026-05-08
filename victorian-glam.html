@@ -150,8 +150,14 @@
             margin-bottom: 0;
         }
 
+        .illustration-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .illustration-card img {
-            width: 100%;
+            max-width: 100%;
+            width: auto;
             height: auto;
             max-height: 500px;
             object-fit: contain;
@@ -167,12 +173,15 @@
             gap: 15px;
         }
         .gallery-row img {
-            width: 100%;
+            max-width: 100%;
+            width: auto;
             height: auto;
             max-height: 300px;
             object-fit: contain;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            display: block;
+            margin: 0 auto;
         }
 
         /* --- Mobile Optimization --- */
