@@ -465,11 +465,13 @@
 
         <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
             <h2>Experience the Full Portfolio</h2>
-            <button onclick="window.print()" style="margin-top: 30px; padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Download Portfolio</button>
-            <p style="font-size: 0.9rem; color: #ffccca; margin-top: 15px; opacity: 0.9;">* Note: For the best mobile export experience, please ensure your print settings are set to <strong>Landscape</strong> orientation.</p>
+            <button id="downloadBtn" onclick="exportPDF()" style="margin-top: 30px; padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Download Portfolio</button>
+            <p id="exportStatus" style="font-size: 0.9rem; color: #ffccca; margin-top: 15px; opacity: 0.9;"></p>
         </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         gsap.registerPlugin(ScrollTrigger);
         document.querySelectorAll('.reveal').forEach(el => {
@@ -481,6 +483,73 @@
                 ease: "power2.out"
             });
         });
+
+        async function exportPDF() {
+            const btn = document.getElementById('downloadBtn');
+            const status = document.getElementById('exportStatus');
+            btn.disabled = true;
+            btn.textContent = 'GENERATING PDF...';
+            status.textContent = 'Please wait, rendering slides...';
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: [297, 167] });
+
+            const slides = document.querySelectorAll('.cover-page-wrapper, .design-block, .thank-you-slide');
+            const totalSlides = slides.length;
+
+            for (let i = 0; i < totalSlides; i++) {
+                status.textContent = `Rendering slide ${i + 1} of ${totalSlides}...`;
+                const slide = slides[i];
+
+                // Temporarily force desktop layout for rendering
+                slide.style.width = '1200px';
+                slide.style.padding = '40px';
+                slide.style.background = 'white';
+
+                const canvas = await html2canvas(slide, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    width: 1200,
+                    windowWidth: 1200
+                });
+
+                // Reset styles
+                slide.style.width = '';
+                slide.style.padding = '';
+                slide.style.background = '';
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                const pageW = 297;
+                const pageH = 167;
+                const imgRatio = canvas.width / canvas.height;
+                const pageRatio = pageW / pageH;
+
+                let drawW, drawH, drawX, drawY;
+                if (imgRatio > pageRatio) {
+                    drawW = pageW;
+                    drawH = pageW / imgRatio;
+                    drawX = 0;
+                    drawY = (pageH - drawH) / 2;
+                } else {
+                    drawH = pageH;
+                    drawW = pageH * imgRatio;
+                    drawX = (pageW - drawW) / 2;
+                    drawY = 0;
+                }
+
+                if (i > 0) pdf.addPage([297, 167], 'landscape');
+                pdf.setFillColor(255, 255, 255);
+                pdf.rect(0, 0, pageW, pageH, 'F');
+                pdf.addImage(imgData, 'JPEG', drawX, drawY, drawW, drawH);
+            }
+
+            pdf.save('Victorian_Glam_Portfolio.pdf');
+            btn.disabled = false;
+            btn.textContent = 'DOWNLOAD PORTFOLIO';
+            status.textContent = 'Download complete!';
+            setTimeout(() => { status.textContent = ''; }, 3000);
+        }
     </script>
 </body>
 </html>
