@@ -211,9 +211,10 @@
 
             /* Define the printable slides */
             .cover-page-wrapper, .design-block, .thank-you-slide {
-                width: 297mm !important;
-                height: 167mm !important;
-                max-height: 167mm !important; 
+                width: 100% !important;
+                max-width: 297mm !important;
+                height: 95vh !important;
+                max-height: 155mm !important; /* Safe zone that respects Firefox's un-removable default margins */
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 page-break-before: avoid !important;
@@ -224,8 +225,8 @@
                 align-items: center !important;
                 background: white !important;
                 border: none !important;
-                margin: 0 !important;
-                padding: 10mm 15mm !important; /* Fixed physical padding */
+                margin: 0 auto !important;
+                padding: 5mm 10mm !important; 
                 box-sizing: border-box !important;
                 overflow: hidden !important; /* Force clipping */
             }
@@ -391,6 +392,7 @@
         <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
             <h2>Experience the Full Portfolio</h2>
             <button onclick="window.print()" style="margin-top: 30px; padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Download Portfolio</button>
+            <p style="font-size: 0.9rem; color: #ffccca; margin-top: 15px; opacity: 0.9;">* Note: For the best mobile export experience, please ensure your print settings are set to <strong>Landscape</strong> orientation.</p>
         </footer>
     </div>
 
