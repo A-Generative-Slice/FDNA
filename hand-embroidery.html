@@ -179,19 +179,34 @@
             .nav-links { display: block !important; }
             .nav-links a { font-size: 0.7rem; }
 
-            .intro-header { padding: 120px 8% 20px; text-align: left; }
-            .hero-showcase { grid-template-columns: 1fr; width: 100%; padding: 0 8%; }
-            .design-block { padding: 80px 8%; } 
+            .cover-layout {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+                padding: 120px 8% 40px !important;
+                text-align: center;
+            }
+            .cover-text { display: flex; flex-direction: column; align-items: center; }
+            .cover-text p { margin: 0 auto 25px; }
             
-            /* Strict Mobile Flow: Text -> Illustration -> Models */
+            .cover-images {
+                height: 250px !important;
+                width: 100%;
+                display: flex !important;
+                justify-content: center;
+            }
+
             .content-wrapper { 
                 display: flex !important; 
                 flex-direction: column !important; 
                 gap: 40px; 
+                text-align: center;
             }
             .text-group { order: 1; align-self: stretch; }
             .asset-stack { order: 2; width: 100%; }
             .gallery-row { order: 3; width: 100%; }
+
+            .design-block { padding: 60px 8%; }
+            .text-group h2 { font-size: 1.8rem; }
         }
 
         /* --- PPT 16:9 Landscape PDF Export --- */
@@ -691,7 +706,7 @@
             // INJECT STRETCH PROTECTION: Force all images to keep natural proportions during capture
             const styleFix = document.createElement('style');
             styleFix.innerHTML = `
-                .illustration-card img, .gallery-row img {
+                .illustration-card img, .gallery-row img, .cover-images img {
                     width: auto !important;
                     height: auto !important;
                     max-width: 100% !important;
@@ -700,7 +715,7 @@
                     display: block !important;
                     margin: 0 auto !important;
                 }
-                .illustration-card, .gallery-row {
+                .illustration-card, .gallery-row, .cover-images {
                     display: flex !important;
                     align-items: center !important;
                     justify-content: center !important;
