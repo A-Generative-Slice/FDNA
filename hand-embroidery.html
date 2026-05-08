@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Embroidery & Printing Arts | Najeema Afrin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            background: #fff;
+            overflow-x: hidden;
+        }
+
+        .story-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Header --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+            border-radius: 100px;
+            z-index: 3000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .cover-page-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-header {
+            padding: 160px 5% 20px;
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+        .intro-header h1 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: var(--maroon);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .intro-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .hero-showcase {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-main img {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        /* --- Design Blocks (Grid Areas for Perfect Order) --- */
+        .design-block {
+            padding: 100px 5%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border-bottom: 1px solid #eee;
+        }
+        .design-block:nth-child(even) { background: #fafafa; }
+
+        .content-wrapper {
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            grid-template-areas: 
+                "text illus"
+                "gallery illus";
+            gap: 20px 60px;
+            align-items: center;
+        }
+
+        .text-group { grid-area: text; align-self: end; }
+        .asset-stack { grid-area: illus; align-self: center; }
+        .gallery-row { grid-area: gallery; align-self: start; }
+
+        .text-group h2 {
+            font-size: 2.2rem;
+            color: var(--maroon);
+            margin-bottom: 20px;
+        }
+        .text-group p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .illustration-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: contain;
+            border-radius: 20px;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+
+        .gallery-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .gallery-row img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            nav { width: auto; left: 15px; right: 15px; transform: none; height: 50px; padding: 0 20px; top: 15px; }
+            .logo { font-size: 0.8rem; }
+            .nav-links { display: block !important; }
+            .nav-links a { font-size: 0.7rem; }
+
+            .intro-header { padding: 120px 8% 20px; text-align: left; }
+            .hero-showcase { grid-template-columns: 1fr; width: 100%; padding: 0 8%; }
+            .design-block { padding: 80px 8%; } 
+            
+            /* Strict Mobile Flow: Text -> Illustration -> Models */
+            .content-wrapper { 
+                display: flex !important; 
+                flex-direction: column !important; 
+                gap: 40px; 
+            }
+            .text-group { order: 1; align-self: stretch; }
+            .asset-stack { order: 2; width: 100%; }
+            .gallery-row { order: 3; width: 100%; }
+        }
+
+        /* --- PPT 16:9 Landscape PDF Export --- */
+        @media print {
+            nav, .download-footer, .section-tag { display: none !important; }
+            
+            body, html { width: 100%; height: auto !important; background: white; margin: 0; padding: 0; }
+
+            .cover-page-wrapper, .design-block {
+                width: 100% !important;
+                height: 98vh !important; 
+                page-break-after: always !important;
+                page-break-inside: avoid !important;
+                page-break-before: avoid !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                background: white !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 2vh 5vw !important; 
+                box-sizing: border-box !important;
+            }
+
+            .intro-header { padding: 0 !important; margin-bottom: 20px !important; }
+            .hero-showcase { margin: 0 !important; width: 100% !important; grid-template-columns: 1fr !important; gap: 30px !important; }
+            .hero-main img { height: 55vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
+
+            .content-wrapper { 
+                grid-template-columns: 1.2fr 1fr !important; 
+                grid-template-areas: 
+                    "text illus"
+                    "gallery illus" !important;
+                gap: 20px 40px !important; 
+                width: 100% !important;
+                max-width: 100% !important; 
+                display: grid !important;
+            }
+            .text-group { align-self: end !important; }
+            .gallery-row { align-self: start !important; }
+            
+            .illustration-card img { height: 75vh !important; box-shadow: none; border: 1px solid #eee; }
+            .gallery-row img { height: 35vh !important; box-shadow: none; }
+            
+            .text-group h2 { font-size: 26pt !important; margin-bottom: 10px !important; color: #000 !important; }
+            .text-group p { font-size: 13pt !important; line-height: 1.5 !important; color: #333 !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">NAJEEMA AFRIN</div>
+        <div class="nav-links">
+            <a href="index.html" style="text-decoration: none; color: var(--maroon); font-weight: 700;">BACK TO HOME</a>
+        </div>
+    </nav>
+
+    <div class="story-container">
+        <!-- Slide 1: Introduction -->
+        <div class="cover-page-wrapper">
+            <header class="intro-header">
+                <h1>Hand Embroidery & Textile Arts</h1>
+                <p>Hand embroidery is the art of decorative stitching on fabric with needle and thread. It adds a decorative element to quilts, garments, and accessories, offering a unique "human touch" that machine work cannot replicate.</p>
+            </header>
+            <section class="hero-showcase reveal">
+                <div class="hero-main">
+                    <img src="assets/embroidry/page-000.jpg" alt="Hand Embroidery Art">
+                </div>
+            </section>
+        </div>
+
+        <!-- Slide 2: The Art of Embroidery -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>More About Hand Embroidery</h2>
+                    <p>One of the oldest forms of textile art, used for centuries to personalize clothing and signify status. It allows for greater texture, varying thread thicknesses, and is a slow, meditative process requiring precision.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-001.jpg" alt="Embroidery Details"></div>
+                </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/embroidry/page-002.jpg">
+                    <img src="assets/embroidry/page-003.jpg">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Common Stitches -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Common Hand Embroidery Stitches</h2>
+                    <p><strong>Basic Line Stitches:</strong> Running Stitch, Backstitch, Stem Stitch.<br><strong>Filling Stitches:</strong> Satin Stitch, Long and Short Stitch.<br><strong>Decorative:</strong> French Knots, Lazy Daisy, Chain Stitch, Fishbone, Bullion Knot.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-004.jpg" alt="Stitch Varieties"></div>
+                </div>
+                <div class="gallery-row reveal">
+                    <img src="assets/embroidry/page-005.jpg">
+                    <img src="assets/embroidry/page-006.jpg">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Phulkari -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Phulkari of Punjab</h2>
+                    <p>"Phulkari means flower work. The design includes not only flowers but also cover motifs and geometrical shapes. The main characteristics are the use of darn stitch on the wrong side of coarse cotton cloth with coloured silken thread."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-007.jpg" alt="Phulkari"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Kasuti -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Kasuti of Karnataka</h2>
+                    <p>"Kasuti work is very intricate, sometimes involves putting up to 5,000 stitches by hand and is traditionally made on Ilkal sarees."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-008.jpg" alt="Kasuti"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Kantha -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Kantha of Bengal</h2>
+                    <p>"It is an ancient craft found in West Bengal. The traditional folk art was popular in Bengal. The word itself means 'Patched Cloth'."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-009.jpg" alt="Kantha"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Rajasthan -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Embroidery of Rajasthan</h2>
+                    <p>"Rajasthan hand embroidery is a traditional art form that uses fine stitch and motifs to decorate clothing and other items."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-010.jpg" alt="Rajasthan Embroidery"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Kashmir -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Embroidery of Kashmir (Kashida)</h2>
+                    <p>"Kashida embroidery which came with Persian, just as the motifs and style suggest much of Persian influence."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-011.jpg" alt="Kashida"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9: Kutch -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Kutch Kathiawar & Sindh Embroidery</h2>
+                    <p>"It is characterized with embroidery in bright colours, mirrors, beads and intricate and extensive embroidery that embellishes the entire fabric."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-012.jpg" alt="Kutch Embroidery"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10: Chikankari -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Chicken work [Chikankari] of Lucknow</h2>
+                    <p>"Chikankari involves stitching intricate patterns onto light weight fabric like cotton, chiffon, silk and muslin."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-013.jpg" alt="Chikankari"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 11: Machine Embroidery Outline -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Machine Embroidery: Outline</h2>
+                    <p>"Machine embroidery is an embroidery process whereby a sewing machine or embroidery machine is used to create patterns on textiles."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-014.jpg" alt="Machine Outline"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Zig Zag -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Machine Embroidery: Zig Zag Stitch</h2>
+                    <p>The Zig Zag stitch is a back-and-forth stitch used primarily for finishing raw edges or creating decorative borders. It is often used for appliqué work or as a faster alternative to hand-worked satin stitches.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-015.jpg" alt="Zig Zag"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Filling -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Machine Embroidery: Filling</h2>
+                    <p>Machine filling involves using dense, closely spaced stitches to cover an entire area of a design with color and texture, creating varied surface effects from smooth finishes to raised patterns.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-016.jpg" alt="Filling"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Couching -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Machine Embroidery: Couching</h2>
+                    <p>Couching is a technique where a decorative cord, yarn, or heavy thread is laid across the fabric surface and fastened down with small, inconspicuous machine stitches. Ideal for bold, 3D outlines.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-017.jpg" alt="Couching"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Printing Styles -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Styles of Printing</h2>
+                    <p><strong>Resist Printing:</strong> A paste prevents dye from penetrating specific areas. <br><br><strong>Stencil Printing:</strong> Applying dye through a cut-out design onto the fabric, allowing for high precision and repetition of complex motifs.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-018.jpg" alt="Printing Styles"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 16: Tie and Dye -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Tie and Dye Printing (Knotting)</h2>
+                    <p>"Tie and dye painting is one of the oldest known methods of hand dyeing. Knotting involves physically tying parts of the fabric into knots before immersion in the dye bath. The tension acts as a resist, creating sunburst-like patterns."</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-019.jpg" alt="Tie and Dye"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 17: Marbling -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Textile Marbling</h2>
+                    <p>A surface design technique that mimics the appearance of natural marble stone. Dyes are floated on a liquid base and swirled into patterns before the fabric is laid on top to "pick up" the beautiful, feathered design.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-020.jpg" alt="Marbling"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 18: Binding -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Binding</h2>
+                    <p>Binding is a classic tie-dye method where sections of the fabric are tightly wrapped with thread or rubber bands. The resulting pattern creates a structured, repeating geometric effect, often referred to as a 'spider' or 'shibori' style.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-021.jpg" alt="Binding"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 19: Sponging -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Sponging Technique</h2>
+                    <p>This involves using a natural or synthetic sponge instead of a brush to apply paint. By dabbing lightly, you create a stippled or mottled texture, excellent for soft backgrounds, cloudy effects, or a vintage look.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-022.jpg" alt="Sponging"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 20: Filling -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Filling Technique</h2>
+                    <p>This technique involves applying a solid, uniform layer of color to a specific enclosed area of a design. It requires a steady hand and a well-loaded brush to ensure the paint is distributed evenly without streaks.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-023.jpg" alt="Filling"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 21: Grading & Stroke -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Grading & Stroke Technique</h2>
+                    <p><strong>Grading:</strong> Blending colors to create a smooth transition, giving a 3D effect.<br><strong>Stroke Technique:</strong> Focuses on brush movement and pressure to create fine tips and thicker bases in a single motion.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-024.jpg" alt="Grading and Stroke"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 22: Outline -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Outline Technique</h2>
+                    <p>Outlining is used to define the edges of a design and add intricate details. It provides a finished look and adds clarity and movement to a composition, usually done with a fine-liner brush.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-025.jpg" alt="Outline"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 23: Batik -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Batik Printing</h2>
+                    <p>Batik is a wax-resist dyeing technique. A design is drawn with melted wax. The famous 'crackled' or veining effect happens when the wax cracks during dyeing, allowing tiny lines of color to seep through.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-026.jpg" alt="Batik Printing"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 24: Direct Block -->
+        <section class="design-block">
+            <div class="content-wrapper">
+                <div class="text-group reveal">
+                    <h2>Direct Block Printing</h2>
+                    <p>Involves carving a design into a block of wood, dipping it in dye, and pressing it onto fabric. It requires great skill to align the blocks perfectly to create a continuous, balanced pattern.</p>
+                </div>
+                <div class="asset-stack reveal">
+                    <div class="illustration-card"><img src="assets/embroidry/page-027.jpg" alt="Block Printing"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
+            <h2>Experience the Full Textile Portfolio</h2>
+            <button onclick="window.print()" style="margin-top: 30px; padding: 18px 40px; background: var(--gold); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; color: var(--maroon); text-transform: uppercase; letter-spacing: 2px;">Download Portfolio</button>
+        </footer>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        document.querySelectorAll('.reveal').forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: { trigger: el, start: "top 95%" },
+                opacity: 0,
+                y: 20,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>
