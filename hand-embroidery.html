@@ -195,49 +195,109 @@
                 margin: 0 !important;
             }
 
+            /* === ALL SLIDES: Base Container === */
             .cover-page-wrapper, .design-block, .thank-you-slide {
                 width: 100% !important;
-                max-width: 297mm !important;
-                height: 95vh !important;
-                max-height: 155mm !important;
+                height: 100vh !important;
+                max-height: 100vh !important;
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
-                page-break-before: avoid !important;
-                break-after: page !important;
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: center !important;
                 align-items: center !important;
                 background: white !important;
                 border: none !important;
-                margin: 0 auto !important;
-                padding: 5mm 10mm !important; 
+                margin: 0 !important;
+                padding: 3vh 5vw !important;
                 box-sizing: border-box !important;
                 overflow: hidden !important;
             }
 
-            .intro-header { padding: 0 !important; margin-bottom: 20px !important; }
-            .hero-showcase { margin: 0 !important; width: 100% !important; grid-template-columns: 1fr !important; gap: 30px !important; }
-            .hero-main img { height: 55vh !important; width: auto !important; margin: 0 auto; box-shadow: none; }
+            /* === SLIDE 1: Cover Page === */
+            .intro-header { 
+                padding: 0 !important; 
+                margin: 0 0 5mm 0 !important; 
+                width: 100% !important;
+            }
+            .intro-header h1 { 
+                font-size: 28pt !important; 
+                margin-bottom: 3mm !important; 
+                color: #5d001d !important; 
+            }
+            .intro-header p { 
+                font-size: 10pt !important; 
+                line-height: 1.4 !important; 
+                color: #555 !important; 
+                max-width: 85% !important; 
+            }
 
+            .hero-showcase { 
+                margin: 0 !important; 
+                width: 100% !important; 
+                display: flex !important;
+                flex: 1 !important;
+            }
+            .hero-main { 
+                width: 100% !important; 
+                display: flex !important; 
+            }
+            .hero-main img { 
+                width: 100% !important; 
+                height: auto !important;
+                max-height: 70vh !important;
+                object-fit: cover !important;
+                border-radius: 3mm !important;
+                box-shadow: none !important; 
+                aspect-ratio: auto !important;
+            }
+
+            /* === CONTENT SLIDES === */
             .content-wrapper { 
-                grid-template-columns: 1.2fr 1fr !important; 
+                display: grid !important;
+                grid-template-columns: 1fr 1.2fr !important; 
                 grid-template-areas: 
                     "text illus"
                     "gallery illus" !important;
-                gap: 15mm 20mm !important; 
+                gap: 5mm 12mm !important; 
                 width: 100% !important;
                 max-width: 100% !important; 
-                display: grid !important;
+                flex: 1 !important;
             }
             .text-group { align-self: end !important; }
-            .gallery-row { align-self: start !important; }
+            .gallery-row { 
+                align-self: start !important; 
+                gap: 4mm !important;
+            }
             
-            .illustration-card img { height: 120mm !important; box-shadow: none; border: 1px solid #eee; }
-            .gallery-row img { height: 50mm !important; box-shadow: none; }
+            .illustration-card img { 
+                height: auto !important; 
+                max-height: 75vh !important;
+                object-fit: contain !important;
+                box-shadow: none !important; 
+                border: 1px solid #eee !important; 
+                border-radius: 2mm !important;
+                padding: 2mm !important;
+            }
+            .gallery-row img { 
+                height: auto !important; 
+                max-height: 30vh !important;
+                object-fit: cover !important;
+                box-shadow: none !important; 
+                border-radius: 2mm !important;
+            }
             
-            .text-group h2 { font-size: 26pt !important; margin-bottom: 5mm !important; color: #000 !important; }
-            .text-group p { font-size: 13pt !important; line-height: 1.5 !important; color: #333 !important; }
+            .text-group h2 { font-size: 20pt !important; margin-bottom: 3mm !important; color: #5d001d !important; }
+            .text-group p { font-size: 10pt !important; line-height: 1.4 !important; color: #333 !important; }
+
+            /* === THANK YOU SLIDE === */
+            .thank-you-slide img {
+                width: 40mm !important;
+                height: 40mm !important;
+                margin-bottom: 5mm !important;
+            }
+            .thank-you-slide h2 { font-size: 28pt !important; color: #5d001d !important; }
+            .thank-you-slide p { font-size: 12pt !important; }
         }
     </style>
 </head>
