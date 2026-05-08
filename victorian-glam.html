@@ -345,20 +345,18 @@
     <div class="story-container">
         <!-- Slide 1: Introduction & Moodboard Wrapper -->
         <div class="cover-page-wrapper">
-            <header class="intro-header">
-                <h1>Victorian Glam</h1>
-                <p>An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
-            </header>
-
-            <section class="hero-showcase reveal">
-                <div class="hero-main">
-                    <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Cover">
+            <div class="cover-layout" style="display: flex; flex-direction: row; align-items: center; gap: 40px; width: 100%; max-width: 1100px; margin: 0 auto; padding: 120px 5% 40px;">
+                <div class="cover-text" style="flex: 1; text-align: left;">
+                    <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); color: var(--maroon); margin-bottom: 20px; letter-spacing: 2px; line-height: 1.1;">Victorian Glam</h1>
+                    <p style="font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 450px;">An immersive journey through 19th-century royal silhouettes reimagined for the modern era. A dialogue between textile science and human expression.</p>
+                    <p style="font-size: 0.8rem; color: var(--maroon); margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600;">By Najeema Afrin</p>
                 </div>
-                <div class="hero-details">
-                    <div class="detail-item"><img src="assets/victorianglam/detail_embroidery_1.jpg"></div>
-                    <div class="detail-item"><img src="assets/victorianglam/detail_lace_1.jpg"></div>
+                <div class="cover-images" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <img src="assets/victorianglam/victorian_glam_cover.jpg" alt="Collection Cover" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; grid-row: 1 / 3;">
+                    <img src="assets/victorianglam/detail_embroidery_1.jpg" style="width: 100%; height: 134px; object-fit: cover; border-radius: 12px;">
+                    <img src="assets/victorianglam/detail_lace_1.jpg" style="width: 100%; height: 134px; object-fit: cover; border-radius: 12px;">
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- Slide 2: Royal Victorian Heritage -->
@@ -545,6 +543,11 @@
             }
 
             pdf.save('Victorian_Glam_Portfolio.pdf');
+
+            // Also open preview in new tab
+            const pdfBlob = pdf.output('blob');
+            const blobUrl = URL.createObjectURL(pdfBlob);
+            window.open(blobUrl, '_blank');
             btn.disabled = false;
             btn.textContent = 'DOWNLOAD PORTFOLIO';
             status.textContent = 'Download complete!';
