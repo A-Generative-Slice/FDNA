@@ -202,10 +202,13 @@
             
             body, html { width: 100%; height: auto !important; background: white; margin: 0; padding: 0; }
 
+            .story-container { margin: 0 !important; padding: 0 !important; }
+
             /* Define the printable slides */
-            .cover-page-wrapper, .design-block {
+            .cover-page-wrapper, .design-block, .thank-you-slide {
                 width: 100% !important;
-                height: 98vh !important; /* Adjusted from 100vh to prevent browser margin overflow causing a blank first page */
+                height: auto !important;
+                min-height: 90vh !important; /* Prevents Firefox from pushing content to next page */
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 page-break-before: avoid !important;
@@ -369,6 +372,13 @@
                     <img src="assets/victorianglam/maroon_mermaid_photo_2.jpg">
                 </div>
             </div>
+        </section>
+
+        <!-- Thank You Slide -->
+        <section class="thank-you-slide" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 5%; width: 100%; border-bottom: 1px solid #eee; background: #fafafa;">
+            <img src="assets/profile%20pic.jpg" alt="Najeema Afrin" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; margin-bottom: 30px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); border: 5px solid white;">
+            <h2 style="font-size: 2.5rem; color: var(--maroon); margin-bottom: 15px;">Thank You</h2>
+            <p style="font-size: 1.2rem; color: #555; max-width: 600px; text-align: center;">For exploring this collection. I look forward to bringing more visionary textile art to life.</p>
         </section>
 
         <footer class="download-footer" style="padding: 100px 5%; text-align: center; background: var(--maroon); color: white; width: 100%;">
