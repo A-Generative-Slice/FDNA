@@ -200,18 +200,24 @@
             /* Hide UI Elements on Print */
             nav, .download-footer, .section-tag { display: none !important; }
             
-            body, html { width: 100%; height: auto !important; background: white; margin: 0; padding: 0; }
+            body, html { width: 100% !important; height: auto !important; background: white !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }
 
-            .story-container { margin: 0 !important; padding: 0 !important; }
+            .story-container { display: block !important; margin: 0 !important; padding: 0 !important; }
+
+            @page {
+                size: 297mm 167mm !important; /* Perfect 16:9 Horizontal PPT Ratio */
+                margin: 0 !important;
+            }
 
             /* Define the printable slides */
             .cover-page-wrapper, .design-block, .thank-you-slide {
-                width: 100vw !important;
-                height: 100vh !important;
-                max-height: 100vh !important; 
+                width: 297mm !important;
+                height: 167mm !important;
+                max-height: 167mm !important; 
                 page-break-after: always !important;
                 page-break-inside: avoid !important;
                 page-break-before: avoid !important;
+                break-after: page !important;
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: center !important;
@@ -219,9 +225,9 @@
                 background: white !important;
                 border: none !important;
                 margin: 0 !important;
-                padding: 4vh 5vw !important; /* Internal padding for the slide */
+                padding: 10mm 15mm !important; /* Fixed physical padding */
                 box-sizing: border-box !important;
-                overflow: hidden !important; /* Force clipping to prevent mobile double-paging */
+                overflow: hidden !important; /* Force clipping */
             }
 
             /* Slide 1 Specifics */
@@ -233,11 +239,11 @@
 
             /* Slides 2-6 Specifics */
             .content-wrapper { 
-                grid-template-columns: 1fr 1fr !important; /* Even split for PPT */
+                grid-template-columns: 1.2fr 1fr !important; 
                 grid-template-areas: 
                     "text illus"
                     "gallery illus" !important;
-                gap: 20px 40px !important; 
+                gap: 15mm 20mm !important; 
                 width: 100% !important;
                 max-width: 100% !important; 
                 display: grid !important;
@@ -245,10 +251,10 @@
             .text-group { align-self: end !important; }
             .gallery-row { align-self: start !important; }
             
-            .illustration-card img { height: 75vh !important; box-shadow: none; border: 1px solid #eee; }
-            .gallery-row img { height: 35vh !important; box-shadow: none; }
+            .illustration-card img { height: 120mm !important; box-shadow: none; border: 1px solid #eee; }
+            .gallery-row img { height: 50mm !important; box-shadow: none; }
             
-            .text-group h2 { font-size: 26pt !important; margin-bottom: 10px !important; color: #000 !important; }
+            .text-group h2 { font-size: 26pt !important; margin-bottom: 5mm !important; color: #000 !important; }
             .text-group p { font-size: 13pt !important; line-height: 1.5 !important; color: #333 !important; }
         }
     </style>
